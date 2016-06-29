@@ -1,0 +1,13 @@
+<style>
+
+</style>
+<template>
+  <div class="square">
+    这里是代码广场。
+  </div>
+</template>
+<script>
+  export default {
+    name: 'Square'
+  };
+</script>
