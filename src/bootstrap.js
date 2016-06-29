@@ -1,16 +1,17 @@
-((app) => {
-  'use strict';
-  let App = Vue.extend({});
-  var Foo = Vue.extend({
-    template: 'AAA'
-  });
-  var Bar = Vue.extend({
-    template: 'Bar'
-  });
-  var router = new VueRouter({ history: true });
-  router.map({
-    '/foo': { component: Foo },
-    '/bar': { component: Bar }
-  });
-  router.start(App, '#js-dojo-app');
-})(window.App);
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+
+import App from './components/App.vue';
+import Foo from './components/Foo.vue';
+
+Vue.use(VueRouter);
+
+let router = new VueRouter({
+  history: true
+});
+
+router.map({
+  '/foo': {component: Foo}
+});
+
+router.start(App, '#js-dojo-app');
