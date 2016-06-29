@@ -1,0 +1,30 @@
+{
+  "name": "js-dojo",
+  "version": "0.1.0",
+  "description": "A dojo for JavaScript and more.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hstarorg/js-dojo.git"
+  },
+  "keywords": [
+    "DoJo",
+    "JavaScript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hstarorg/js-dojo/issues"
+  },
+  "homepage": "https://github.com/hstarorg/js-dojo#readme",
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.2",
+    "jquery": "^2.2.4",
+    "tether": "^1.3.2",
+    "vue": "^1.0.26",
+    "vue-router": "^0.7.13"
+  }
+}
