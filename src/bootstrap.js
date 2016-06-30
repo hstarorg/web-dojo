@@ -5,6 +5,7 @@ import App from './components/App.vue';
 import Foo from './components/Foo.vue';
 import Square from './components/Square.vue';
 import MyCode from './components/MyCode.vue';
+import Code from './components/Code.vue'; 
 
 Vue.use(VueRouter);
 
@@ -15,7 +16,7 @@ let router = new VueRouter({
 router.map({
   '/square': { component: Square },
   '/mycode': { component: MyCode },
-  '/:id': { component: Foo },
+  '/:id': { component: Code },
 
 });
 
