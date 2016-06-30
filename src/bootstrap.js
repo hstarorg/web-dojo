@@ -17,11 +17,12 @@ router.map({
   '/square': { component: Square },
   '/mycode': { component: MyCode },
   '/:id': { component: Code },
-
 });
 
 router.redirect({
   '*': '/square'
-})
+});
+
+export {router};
 
 router.start(App, '#js-dojo-app');

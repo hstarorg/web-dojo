@@ -2,6 +2,7 @@
 require('!style!css!./../node_modules/bootstrap/dist/css/bootstrap.css');
 require('!style!css!./../node_modules/tether/dist/css/tether.css');
 require('jquery');
+// require('./../monaco-editor/min/loader.js');
 // require('tether');
 // require('bootstrap');
 

@@ -1,5 +1,6 @@
 'use strict';
 
+let path = require('path');
 let webpack = require('webpack');
 let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
@@ -16,6 +17,7 @@ module.exports = (() => {
       filename: '[name].js'
     },
     resolve: {
+      // root: path.resolve('./'),
       extensions: ['', '.js', '.vue', '.html'],
       alias: {
         jquery: 'jquery/src/jquery'//,

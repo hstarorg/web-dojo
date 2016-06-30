@@ -40,6 +40,7 @@
   </div>
 </template>
 <script>
+  import {router} from './../bootstrap';
   export default {
     //Why use this? 要为每个组件创建自己独立的data实例。
     data() {
@@ -49,6 +50,7 @@
     },
     methods: {
       createCode(evt) {
+        router.go('/abc');
         alert('Create code');
       },
       updateCode(evt) {
