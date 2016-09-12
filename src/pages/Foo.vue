@@ -1,5 +1,7 @@
 <template>
-  Foo,Test
+  <div>
+    Foo,Test
+  </div>
 </template>
 <script>
   export default {

@@ -21,25 +21,25 @@
     height: 100%;
     overflow-y: hidden;
   }
-  .js-editor-container{
+  
+  .js-editor-container {
     overflow: hidden;
   }
 </style>
 <template>
-  <div class="code-tool-bar">
-  </div>
-  <div class="code-editor-container">
-    <div class="editor-container">
-      <div id="js-editor-container" style="height: 100%;"></div>
+  <div>
+    <div class="code-tool-bar">
     </div>
-    <div class="preview-container">
-      <iframe src="http://cn.bing.com" frameborder="0" style="width: 100%;height: calc(100vh - 108px);" border="0" marginwidth="0"
-        marginheight="0" scrolling="yes" allowtransparency="yes"></iframe>
+    <div class="code-editor-container">
+      <div class="editor-container">
+        <div id="js-editor-container" style="height: 100%;"></div>
+      </div>
+      <div class="preview-container">
+        <iframe src="http://cn.bing.com" frameborder="0" style="width: 100%;height: calc(100vh - 108px);" border="0" marginwidth="0"
+          marginheight="0" scrolling="yes" allowtransparency="yes"></iframe>
+      </div>
     </div>
   </div>
-  <script>
-  
-  </script>
 </template>
 <script>
   export default {
