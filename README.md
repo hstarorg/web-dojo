@@ -2,12 +2,17 @@
 
 A dojo website for JavaScript and more.
 
-Used Bootstrap 4.0、Vue、Monaco Editor and more.
+Used Bootstrap 4.0、Vue2、Monaco Editor and more.
 
-# How to develop?
+## Build Setup
 
-``$ git clone https://github.com/hstarorg/js-dojo.git``
+``` bash
+# install dependencies
+npm install
 
-``$ npm install``
+# serve with hot reload at localhost:8080
+npm run dev
 
-``$ npm run serve``
+# build for production with minification
+npm run build
+```
