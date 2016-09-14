@@ -4,15 +4,12 @@ A dojo website for JavaScript and more.
 
 Used Bootstrap 4.0、Vue2、Monaco Editor and more.
 
-## Build Setup
+# Two Parts
 
-``` bash
-# install dependencies
-npm install
+## [/server](server)
 
-# serve with hot reload at localhost:8080
-npm run dev
+server-side for js-dojo, provider some rest api.
 
-# build for production with minification
-npm run build
-```
+## [/client](client)
+
+client-side for js-dojo.

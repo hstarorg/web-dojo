@@ -1,0 +1,22 @@
+{
+  "name": "js-dojo-server",
+  "version": "0.0.1",
+  "description": "server side for js-dojo",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hstarorg/js-dojo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hstarorg/js-dojo/issues"
+  },
+  "homepage": "https://github.com/hstarorg/js-dojo#readme",
+  "author": "Jay.M.Hu <hm910705@163.com>",
+  "license": "MIT",
+  "dependencies": {
+    "rest-express": "^1.1.0"
+  }
+}
