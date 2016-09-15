@@ -5,8 +5,7 @@
 </template>
 <script>
   export default {
-    name: 'Foo',
-    data: () => {
+    data() {
       return {
         a: 1
       }

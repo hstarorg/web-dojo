@@ -8,6 +8,5 @@
 </template>
 <script>
   export default {
-    name: 'Square'
   };
 </script>

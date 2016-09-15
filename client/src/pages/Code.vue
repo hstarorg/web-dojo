@@ -43,8 +43,7 @@
 </template>
 <script>
   export default {
-    name: 'Code',
-    data: () => {
+    data() {
       return {
         a: 1
       }

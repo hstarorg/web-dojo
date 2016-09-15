@@ -10,7 +10,7 @@
         <a class="navbar-brand" href="/">JS DOJO</a>
         <ul class="nav navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" v-link="{path: '/square'}">代码广场 <span class="sr-only">(current)</span></a>
+            <router-link to="/square">Code square<span class="sr-only">(current)</span></router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" @click.stop.prevent="createCode($event)">New</a>
@@ -22,7 +22,7 @@
             <a class="nav-link" href="#" @click.stop.prevent="forkCode($event)">Fork</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" v-link="{path: '/mycode'}">MyCode</a>
+            <router-link to="/mycode">MyCode</router-link>
           </li>
         </ul>
         <form class="form-inline pull-xs-right">
@@ -41,6 +41,7 @@
 </template>
 <script>
   export default {
+    name: 'layout',
     //Why use this? 要为每个组件创建自己独立的data实例。
     data() {
       return {
