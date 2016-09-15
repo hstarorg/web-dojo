@@ -1,21 +1,21 @@
 <template>
-  <div id="app">
-    <h1>{{ msg }}</h1>
+  <div id="js-dojo-app">
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+// import auth from '../auth'
 export default {
   data () {
     return {
-      msg: 'Hello Vue 2.0!'
+      loggedIn: false //auth.loggedIn()
     }
+  },
+  created () {
+    // auth.onChange = loggedIn => {
+    //   this.loggedIn = loggedIn
+    // }
   }
 }
 </script>
-
-<style>
-body {
-  font-family: Helvetica, sans-serif;
-}
-</style>

@@ -1,5 +1,5 @@
-var path = require('path')
-var webpack = require('webpack')
+var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   entry: './src/main.js',
@@ -7,6 +7,13 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
     filename: 'build.js'
+  },
+  resolve: {
+    alias: {
+      'vue': 'vue/dist/vue.js',
+      'vue-router': 'vue-router/dist/vue-router.js',
+      'vuex': 'vuex/dist/vuex.js'
+    }
   },
   resolveLoader: {
     root: path.join(__dirname, 'node_modules'),
@@ -36,7 +43,7 @@ module.exports = {
     noInfo: true
   },
   devtool: '#eval-source-map'
-}
+};
 
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
@@ -53,4 +60,4 @@ if (process.env.NODE_ENV === 'production') {
       }
     })
   ])
-}
+};
