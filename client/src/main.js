@@ -1,4 +1,7 @@
 import Vue from 'vue';
-import { app } from './app';
+import App from './App.vue';
 
-app.$mount('#js-dojo-app');
+new Vue({
+  el: '#app',
+  render: h => h(App)
+});

@@ -17,6 +17,8 @@
   "author": "Jay.M.Hu <hm910705@163.com>",
   "license": "MIT",
   "dependencies": {
+    "camo": "^0.12.2",
+    "nedb": "^1.8.0",
     "rest-express": "^1.1.0"
   }
 }

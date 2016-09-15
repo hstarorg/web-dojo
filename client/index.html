@@ -12,11 +12,13 @@
 </head>
 
 <body>
-  <div id="js-dojo-app"></div>
+  <div id="app"></div>
+
   <script src="/static/monaco-editor/vs/loader.js"></script>
   <script>
     require.config({ paths: { 'vs': '/assets/monaco-editor/vs' }});
   </script>
+  <script src="dist/build.js"></script>
 </body>
 
 </html>
