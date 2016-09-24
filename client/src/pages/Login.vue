@@ -28,25 +28,26 @@
             <div class="section-title">
               <h3>JS-DOJO Log In</h3>
             </div>
-            <div class="textbox-wrap focused">
+            <div class="textbox-wrap">
               <div class="input-group">
-                <span class="input-group-addon "><i class="fa fa-user"></i></span>
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
                 <input type="text" required="required" class="form-control" placeholder="Username" v-model="user.username">
               </div>
             </div>
-            <div class="textbox-wrap">
+            <div class="textbox-wrap" :class="{focused: true}">
               <div class="input-group">
-                <span class="input-group-addon "><i class="fa fa-key"></i></span>
-                <input type="password" required="required" class="form-control " placeholder="Password" v-model="user.password">
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <input type="password" required="required" class="form-control " placeholder="Password" v-model="user.password" @click="">
               </div>
             </div>
+            <div></div>
             <div class="input-group">
               <label>
                   <input type="checkbox" v-model="remember">&nbsp;Remember Me
               </label>
             </div>
             <div class="login-form-action clearfix">
-              <button type="submit" class="btn btn-success pull-right green-btn">Log In &nbsp; <i class="fa fa-chevron-right"></i></button>
+              <button type="button" @click="login()" :disabled="!user.username || !user.password" class="btn btn-success pull-right green-btn">Log In &nbsp; <i class="fa fa-chevron-right"></i></button>
             </div>
           </form>
         </div>
@@ -66,7 +67,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { auth } from './../services';
 export default {
@@ -77,18 +77,20 @@ export default {
         username: 'admin',
         password: ''
       },
-      remember: false
+      remember: false,
+      error: false
     }
   },
   methods: {
     login () {
-      auth.login(this.email, this.pass, loggedIn => {
+      auth.login(this.user.username, this.user.password)
+      .then(loggedIn => {
         if (!loggedIn) {
           this.error = true
         } else {
-          this.$router.replace(this.$route.query.redirect || '/')
+          this.$router.push(this.$route.query.redirect || '/')
         }
-      })
+      });
     }
   }
 }

@@ -1,6 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
 
+let nodeModules = filepath => {
+  return path.join(__dirname, 'node_modules', filepath);
+};
+
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -10,9 +14,10 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue': 'vue/dist/vue.js',
-      'vue-router': 'vue-router/dist/vue-router.js',
-      'vuex': 'vuex/dist/vuex.js'
+      'vue': nodeModules('vue/dist/vue.js'),
+      'vue-router': nodeModules('vue-router/dist/vue-router.js'),
+      'vue-resource': nodeModules('vue-resource/dist/vue-resource.js'),
+      'vuex': nodeModules('vuex/dist/vuex.js')
     }
   },
   resolveLoader: {

@@ -20,7 +20,9 @@
   "author": "Jay.M.Hu <hm910705@163.com>",
   "license": "MIT",
   "dependencies": {
+    "lodash": "^4.16.1",
     "vue": "^2.0.0-rc.6",
+    "vue-resource": "^1.0.3",
     "vue-router": "^2.0.0-rc.5",
     "vuex": "^2.0.0-rc.5"
   },

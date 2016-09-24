@@ -13,9 +13,6 @@ export default {
     }
   },
   created () {
-    // auth.onChange = loggedIn => {
-    //   this.loggedIn = loggedIn
-    // }
   }
 }
 </script>

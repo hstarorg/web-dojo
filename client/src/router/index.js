@@ -15,7 +15,8 @@ import Square from './../pages/Square.vue';
 import Code from './../pages/Code.vue';
 
 let requireAuth = (route, redirect, next) => {
-  if (!auth.loggedIn()) {
+  console.log(auth);
+  if (!auth.isLogged) {
     redirect({
       path: '/login',
       query: { redirect: route.fullPath }
@@ -38,7 +39,7 @@ export const router = new VueRouter({
       }
     },
     {
-      path: '/', component: Layout,
+      path: '/', component: Layout, meta: { auth: true },
       children: [
         { path: '', component: Code },
         { path: 'foo', component: Foo },
@@ -47,4 +48,12 @@ export const router = new VueRouter({
       ]
     }
   ]
+});
+
+router.beforeEach((route, redirect, next) => {
+  if (route.matched.some(record => record.meta.auth)) {
+    requireAuth(route, redirect, next);
+  } else {
+    next();
+  }
 });

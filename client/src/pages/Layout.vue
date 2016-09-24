@@ -40,6 +40,7 @@
   </div>
 </template>
 <script>
+  import { eventBus } from './../common';
   export default {
     name: 'layout',
     //Why use this? 要为每个组件创建自己独立的data实例。
@@ -48,9 +49,13 @@
         searchKey: 'abc'
       };
     },
+    mouted() {
+       eventBus.emit('test', 'aaa');
+    },
     methods: {
       createCode(evt) {
-        this.$router.go('/abc');
+        eventBus.emit('test', 'aaa');
+        // this.$router.go('/abc');
         alert('Create code');
       },
       updateCode(evt) {
