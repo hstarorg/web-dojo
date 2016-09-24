@@ -4,6 +4,9 @@
   "description": "server side for js-dojo",
   "main": "index.js",
   "scripts": {
+    "start": "npm run dev",
+    "dev": "gulp",
+    "build": "gulp -r",
     "test": "test"
   },
   "repository": {
@@ -18,7 +21,13 @@
   "license": "MIT",
   "dependencies": {
     "camo": "^0.12.2",
+    "mongoose": "^4.6.1",
     "nedb": "^1.8.0",
     "rest-express": "^1.1.0"
+  },
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-develop-server": "^0.5.2"
   }
 }
