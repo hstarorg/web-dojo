@@ -50,8 +50,18 @@ export const router = new VueRouter({
   ]
 });
 
+let isTheFirst = true;
+
 router.beforeEach((route, redirect, next) => {
   if (route.matched.some(record => record.meta.auth)) {
+    if (isTheFirst) {
+      auth.autoLogin(auth.getLocalToken())
+        .then(() => {
+          requireAuth(route, redirect, next);
+        });
+      isTheFirst = false;
+      return;
+    }
     requireAuth(route, redirect, next);
   } else {
     next();

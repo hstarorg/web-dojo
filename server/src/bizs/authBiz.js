@@ -7,10 +7,31 @@ module.exports = {
     User.findOne({ username: data.username, password: data.password })
       .then(user => {
         if (!user) {
-          res.send(new BusError('user not found.'));
+          return res.send(new BusError('user not found.'));
+        }
+        let token = Math.random().toString(16).replace('.', '');
+        return User.findOneAndUpdate({ _id: user._id }, { $set: { token: token, expireTime: Date.now() + 1000 * 60 * 60 * 24 * 7 } })
+          .then(data => {
+            res.send({
+              token: token,
+              user: {
+                username: user.username
+              }
+            });
+          });
+      })
+      .catch(reason => next(reason));
+  },
+
+  doAutoLogin(req, res, next) {
+    let token = req.body.token;
+    User.findOne({ token: token, expireTime: { $gt: Date.now() } })
+      .then(user => {
+        if (!user) {
+          return res.send(new BusError('auto login failed.'));
         }
         res.send({
-          token: '',
+          token: token,
           user: {
             username: user.username
           }

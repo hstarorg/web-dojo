@@ -16,7 +16,18 @@ export const auth = {
   },
 
   autoLogin(token) {
-
+    return new Promise((resolve, reject) => {
+      ajax.post(`${AppConf.apiHost}/auth/autologin`, { token: token })
+        .then(data => {
+          this.user = data.user;
+          this._token = data.token;
+          storage.local.set('x-token', data.token);
+          this.isLogged = true;
+          resolve(true);
+        }).catch(reason => {
+          resolve(false);
+        });
+    });
   },
 
   getToken() {
