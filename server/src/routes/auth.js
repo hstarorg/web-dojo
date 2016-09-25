@@ -1,7 +1,7 @@
 let router = new Router();
 let authBiz = require('./../bizs/authBiz');
 
-router.post('/login', authBiz.login);
+router.post('/login', authBiz.doLogin);
 
 module.exports = {
   priority: 0,
