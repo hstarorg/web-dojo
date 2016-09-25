@@ -9,7 +9,12 @@ module.exports = {
         if (!user) {
           res.send(new BusError('user not found.'));
         }
-        res.send(user);
+        res.send({
+          token: '',
+          user: {
+            username: user.username
+          }
+        });
       })
       .catch(reason => next(reason));
   }

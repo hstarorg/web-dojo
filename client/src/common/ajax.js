@@ -4,10 +4,8 @@ Vue.use(VueResource);
 
 const HTTP_TIMEOUT = 1000 * 60; // 请求超时时间1分钟
 
-Vue.http.options.emulateJSON = true;
-
 let _buildOptions = (method, options) => {
-  return options;
+  return options || {};
 };
 
 let _request = (method, url, data, options) => {
@@ -22,16 +20,23 @@ let _request = (method, url, data, options) => {
   if (options.params) {
     reqestOptions.params = options.params;
   }
-  return Vue.http(reqestOptions)
-    .then(res => {
-      return res.json();
-    })
-    .then(data => {
-      return data;
-    })
-    .catch(reason => {
-      console.log(reason);
-    });
+  return new Promise((resolve, reject) => {
+    Vue.http(reqestOptions)
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        if (data.hasError) {
+          alert(data.message);
+          return reject(data);
+        }
+        resolve(data);
+      })
+      .catch(reason => {
+        console.log('ajax error', reason);
+        reject(reason);
+      });
+  });
 };
 
 export const ajax = {
@@ -57,7 +62,7 @@ export const ajax = {
    * @param options 配置项
    */
   post(url, data, options) {
-    return _request('post', url, null, _buildOptions('post', options));
+    return _request('post', url, data, _buildOptions('post', options));
   },
   /**
    * PUT data

@@ -4,7 +4,6 @@
   html {
     height: 100%;
   }
-  
   .page-login {
     background-color: #1abc9c;
     background-image: radial-gradient(circle farthest-side at center top, #55e7ca 0%, #1abc9c 100%);
@@ -47,7 +46,7 @@
               </label>
             </div>
             <div class="login-form-action clearfix">
-              <button type="button" @click="login()" :disabled="!user.username || !user.password" class="btn btn-success pull-right green-btn">Log In &nbsp; <i class="fa fa-chevron-right"></i></button>
+              <button type="submit" :disabled="!user.username || !user.password" class="btn btn-success pull-right green-btn">Log In &nbsp; <i class="fa fa-chevron-right"></i></button>
             </div>
           </form>
         </div>

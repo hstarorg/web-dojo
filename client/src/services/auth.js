@@ -1,10 +1,18 @@
-import { ajax } from './../common';
+import { ajax, storage } from './../common';
 
 export const auth = {
   isLogged: false,
+  user: {},
+  _token: '',
   login(username, password) {
-    this.isLogged = true;
-    return Promise.resolve(this.isLogged);
+    return ajax.post(`${AppConf.apiHost}/auth/login`, { username: username, password: password })
+      .then(data => {
+        this.user = data.user;
+        this._token = data.token;
+        storage.local.set('x-token', data.token);
+        this.isLogged = true;
+        return this.isLogged;
+      });
   },
 
   autoLogin(token) {
@@ -12,7 +20,11 @@ export const auth = {
   },
 
   getToken() {
-    return localStorage.token
+    return this._token;
+  },
+
+  getLocalToken() {
+    return localStorage.getItem('x-token');
   },
 
   logout() {
