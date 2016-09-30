@@ -9,7 +9,6 @@ import Login from './../pages/Login.vue';
 
 import Layout from './../pages/Layout.vue';
 import Home from './../pages/Home.vue';
-import Foo from './../pages/Foo.vue';
 import MyCode from './../pages/MyCode.vue';
 import Square from './../pages/Square.vue';
 import Code from './../pages/Code.vue';
@@ -18,7 +17,7 @@ let requireAuth = (to, from, next) => {
   if (!auth.isLogged) {
     next({
       path: '/login',
-      query: { redirect: route.fullPath }
+      query: { redirect: to.fullPath }
     });
   } else {
     next();
@@ -41,7 +40,6 @@ export const router = new VueRouter({
       path: '/', component: Layout, meta: { auth: true },
       children: [
         { path: '', component: Code },
-        { path: 'foo', component: Foo },
         { path: 'mycode', component: MyCode },
         { path: 'square', component: Square }
       ]
@@ -52,7 +50,7 @@ export const router = new VueRouter({
 let isTheFirst = true;
 
 router.beforeEach((to, from, next) => {
-  if (route.matched.some(record => record.meta.auth)) {
+  if (to.matched.some(record => record.meta.auth)) {
     if (isTheFirst) {
       auth.autoLogin(auth.getLocalToken())
         .then(() => {

@@ -125,7 +125,7 @@
 
 /*#region ScrollBar Styles */
 
-::-webkit-scrollbar {
+/*::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
@@ -144,4 +144,4 @@
 
 ::-webkit-scrollbar-thumb:horizontal {
   background-color: rgba(0, 0, 0, 0.2);
-}
+}*/

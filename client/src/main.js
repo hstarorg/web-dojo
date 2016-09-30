@@ -1,3 +1,5 @@
+import './css/main.css';
+
 import Vue from 'vue';
 
 import 'lodash';
