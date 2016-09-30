@@ -14,10 +14,9 @@ import MyCode from './../pages/MyCode.vue';
 import Square from './../pages/Square.vue';
 import Code from './../pages/Code.vue';
 
-let requireAuth = (route, redirect, next) => {
-  console.log(auth);
+let requireAuth = (to, from, next) => {
   if (!auth.isLogged) {
-    redirect({
+    next({
       path: '/login',
       query: { redirect: route.fullPath }
     });
@@ -33,9 +32,9 @@ export const router = new VueRouter({
     { path: '/login', component: Login },
     {
       path: '/logout',
-      beforeEnter(route, redirect) {
+      beforeEnter(to, from, next) {
         auth.logout();
-        redirect('/');
+        next('/');
       }
     },
     {
@@ -52,17 +51,17 @@ export const router = new VueRouter({
 
 let isTheFirst = true;
 
-router.beforeEach((route, redirect, next) => {
+router.beforeEach((to, from, next) => {
   if (route.matched.some(record => record.meta.auth)) {
     if (isTheFirst) {
       auth.autoLogin(auth.getLocalToken())
         .then(() => {
-          requireAuth(route, redirect, next);
+          requireAuth(to, from, next);
         });
       isTheFirst = false;
       return;
     }
-    requireAuth(route, redirect, next);
+    requireAuth(to, from, next);
   } else {
     next();
   }

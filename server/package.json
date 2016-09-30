@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "camo": "^0.12.2",
+    "gulp": "github:gulpjs/gulp#4.0",
     "mongoose": "^4.6.1",
     "nedb": "^1.8.0",
     "rest-express": "^1.1.1"

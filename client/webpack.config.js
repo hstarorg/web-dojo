@@ -20,9 +20,6 @@ module.exports = {
       'vuex': nodeModules('vuex/dist/vuex.js')
     }
   },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
-  },
   module: {
     loaders: [
       {
@@ -45,7 +42,10 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
+    host: '0.0.0.0',
+    port: 7410,
+    open: true
   },
   devtool: '#eval-source-map'
 };
