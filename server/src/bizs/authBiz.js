@@ -1,6 +1,8 @@
 let User = require('./../models/User');
 let BusError = require('./../models/BusError');
 
+const EXPIRE_TIME_SPAN = 1000 * 60 * 60 * 24 * 7; // 7天的毫秒数
+
 module.exports = {
   doLogin(req, res, next) {
     let data = req.body;
@@ -10,7 +12,7 @@ module.exports = {
           return res.send(new BusError('user not found.'));
         }
         let token = Math.random().toString(16).replace('.', '');
-        return User.findOneAndUpdate({ _id: user._id }, { $set: { token: token, expireTime: Date.now() + 1000 * 60 * 60 * 24 * 7 } })
+        return User.findOneAndUpdate({ _id: user._id }, { $set: { token: token, expireTime: Date.now() + EXPIRE_TIME_SPAN } })
           .then(data => {
             res.send({
               token: token,
