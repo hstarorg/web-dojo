@@ -6,8 +6,25 @@ export default {
   data() {
     return {
       jsCode: 'var a = 1;',
-      htmlCode: '<div></div>',
-      cssCode: 'body{}',
+      htmlCode:`<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Good</title>
+    <!--css-->
+  </head>
+  <body>
+    <!--js-->
+  </body>
+</html>`,
+      cssCode: `html{
+  height: 100%;
+}
+body{
+  border: 1px solid red;
+  min-height: 100%;
+}
+      `,
       editorHheight: 0,
       moveObj: {
         startX: 0,
@@ -57,6 +74,21 @@ export default {
     },
     setEditorHeight() {
       this.editorHheight = this.$el.querySelector('.editor-container').offsetHeight - 42;
+    },
+    _buildHtmlCodeForPreview() {
+      let html = this.htmlCode;
+      html = html.replace(/<!--css-->/, `<style>${this.cssCode}</style>`);
+      html = html.replace(/<!--js-->/, `<script>${this.jsCode}</script>`);
+      return html;
+    },
+    runCode() {
+      let iframeHtml = `<iframe id="previewFrame" frameborder="0" style="width: 100%;height: 100%;" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes"></iframe>`;
+      this.$el.querySelector('.preview-container').innerHTML = iframeHtml;
+      let fd = document.getElementById('previewFrame').contentDocument;
+      fd.open();
+      fd.write('');
+      fd.write(this._buildHtmlCodeForPreview());
+      fd.close();
     }
   }
 };
