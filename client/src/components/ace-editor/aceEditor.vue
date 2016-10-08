@@ -4,7 +4,40 @@
   </div>
 </template>
 <script>
+  function unpacker_filter(source) {
+    var trailing_comments = '',
+      comment = '',
+      unpacked = '',
+      found = false;
+    // cut trailing comments
+    do {
+      found = false;
+      if (/^\s*\/\*/.test(source)) {
+        found = true;
+        comment = source.substr(0, source.indexOf('*/') + 2);
+        source = source.substr(comment.length).replace(/^\s+/, '');
+        trailing_comments += comment + "\n";
+      } else if (/^\s*\/\//.test(source)) {
+        found = true;
+        comment = source.match(/^\s*\/\/.*/)[0];
+        source = source.substr(comment.length).replace(/^\s+/, '');
+        trailing_comments += comment + "\n";
+      }
+    } while (found);
+    var unpackers = [P_A_C_K_E_R, Urlencoded, JavascriptObfuscator, MyObfuscate];
+    for (var i = 0; i < unpackers.length; i++) {
+      if (unpackers[i].detect(source)) {
+        unpacked = unpackers[i].unpack(source);
+        if (unpacked != source) {
+          source = unpacker_filter(unpacked);
+        }
+      }
+    }
+    return trailing_comments + source;
+  }
+
   export default {
+    name: 'ace-editor',
     props: {
       value: {
         type: String,
@@ -23,10 +56,9 @@
         default: 100
       }
     }, //['value', 'mode', 'theme', 'height'],
-    name: 'ace-editor',
     data(){
       return {
-        editorId: `ace-editor-${Date.now()}`,
+        editorId: `ace-editor-${Math.random().toString(16).replace('.', '')}`,
         editor: null,
         editorValueCache: ''
       };
@@ -36,11 +68,45 @@
       editor.session.setMode(`ace/mode/${this.mode}`);
       editor.setTheme(`ace/theme/${this.theme}`);
       editor.setFontSize(14);
+      editor.setOption('enableBasicAutocompletion', true);
+      editor.setOption('enableEmmet', true);
+      editor.setOption('enableLiveAutocompletion', true);
+      editor.setOption('tabSize', 2);
+      editor.setOption('enableSnippets', true);
+      editor.setOption('showPrintMargin', false);
       editor.setValue(this.value);
+      editor.$blockScrolling = Infinity;
       let self = this;
-      this.editor.on('change', function(e){
-        self.value = self.editor.getValue();
-        self.editorValueCache = self.value;
+      editor.commands.addCommand({
+        name: 'format',
+        bindKey: {win: 'Shift-Alt-F', mac: 'Command-Option-F'},
+        exec(editor){
+          let val = unpacker_filter(editor.getValue());
+          let formattedVal = window.js_beautify(val, {
+            brace_style: 'collapse',
+            break_chained_methods: false,
+            comma_first: false,
+            e4x: false,
+            end_with_newline: true,
+            indent_char: ' ',
+            indent_inner_html: false,
+            indent_scripts: 'normal',
+            indent_size: '2',
+            jslint_happy: false,
+            keep_array_indentation: false,
+            max_preserve_newlines: '5',
+            preserve_newlines: true,
+            space_before_conditional: true,
+            unescape_strings: false,
+            wrap_line_length: '0'
+          });
+          editor.setValue(formattedVal, 1);
+        }
+      });
+      editor.on('change', function(e){
+        let val = self.editor.getValue();
+        self.$emit('input', val);
+        self.editorValueCache = val;
       });
     },
     beforeDestroy(){
