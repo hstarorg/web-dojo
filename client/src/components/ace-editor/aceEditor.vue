@@ -64,49 +64,51 @@
       };
     },
     mounted(){
-      let editor = this.editor = ace.edit(this.editorId);
-      editor.session.setMode(`ace/mode/${this.mode}`);
-      editor.setTheme(`ace/theme/${this.theme}`);
-      editor.setFontSize(14);
-      editor.setOption('enableBasicAutocompletion', true);
-      editor.setOption('enableEmmet', true);
-      editor.setOption('enableLiveAutocompletion', true);
-      editor.setOption('tabSize', 2);
-      editor.setOption('enableSnippets', true);
-      editor.setOption('showPrintMargin', false);
-      editor.setValue(this.value);
-      editor.$blockScrolling = Infinity;
-      let self = this;
-      editor.commands.addCommand({
-        name: 'format',
-        bindKey: {win: 'Shift-Alt-F', mac: 'Command-Option-F'},
-        exec(editor){
-          let val = unpacker_filter(editor.getValue());
-          let formattedVal = window.js_beautify(val, {
-            brace_style: 'collapse',
-            break_chained_methods: false,
-            comma_first: false,
-            e4x: false,
-            end_with_newline: true,
-            indent_char: ' ',
-            indent_inner_html: false,
-            indent_scripts: 'normal',
-            indent_size: '2',
-            jslint_happy: false,
-            keep_array_indentation: false,
-            max_preserve_newlines: '5',
-            preserve_newlines: true,
-            space_before_conditional: true,
-            unescape_strings: false,
-            wrap_line_length: '0'
-          });
-          editor.setValue(formattedVal, 1);
-        }
-      });
-      editor.on('change', function(e){
-        let val = self.editor.getValue();
-        self.$emit('input', val);
-        self.editorValueCache = val;
+      this.$nextTick(function(){
+        let editor = this.editor = ace.edit(this.editorId);
+        editor.$blockScrolling = Infinity;
+        editor.session.setMode(`ace/mode/${this.mode}`);
+        editor.setTheme(`ace/theme/${this.theme}`);
+        editor.setFontSize(14);
+        editor.setOption('enableBasicAutocompletion', true);
+        editor.setOption('enableEmmet', true);
+        editor.setOption('enableLiveAutocompletion', false);
+        editor.setOption('tabSize', 2);
+        editor.setOption('enableSnippets', true);
+        editor.setOption('showPrintMargin', false);
+        editor.setValue(this.value, 1);
+        let self = this;
+        editor.commands.addCommand({
+          name: 'format',
+          bindKey: {win: 'Shift-Alt-F', mac: 'Command-Option-F'},
+          exec(editor){
+            let val = unpacker_filter(editor.getValue());
+            let formattedVal = window.js_beautify(val, {
+              brace_style: 'collapse',
+              break_chained_methods: false,
+              comma_first: false,
+              e4x: false,
+              end_with_newline: true,
+              indent_char: ' ',
+              indent_inner_html: false,
+              indent_scripts: 'normal',
+              indent_size: '2',
+              jslint_happy: false,
+              keep_array_indentation: false,
+              max_preserve_newlines: '5',
+              preserve_newlines: true,
+              space_before_conditional: true,
+              unescape_strings: false,
+              wrap_line_length: '0'
+            });
+            editor.setValue(formattedVal, 1);
+          }
+        });
+        editor.on('change', function(e){
+          let val = self.editor.getValue();
+          self.$emit('input', val);
+          self.editorValueCache = val;
+        });
       });
     },
     beforeDestroy(){

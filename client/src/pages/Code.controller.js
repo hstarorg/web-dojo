@@ -23,8 +23,7 @@ export default {
 body{
   border: 1px solid red;
   min-height: 100%;
-}
-      `,
+}`,
       editorHheight: 0,
       moveObj: {
         startX: 0,
@@ -84,7 +83,7 @@ body{
     runCode() {
       let iframeHtml = `<iframe id="previewFrame" frameborder="0" style="width: 100%;height: 100%;" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes"></iframe>`;
       this.$el.querySelector('.preview-container').innerHTML = iframeHtml;
-      let fd = document.getElementById('previewFrame').contentDocument;
+      let fd = document.getElementById('previewFrame').contentDocument; 
       fd.open();
       fd.write('');
       fd.write(this._buildHtmlCodeForPreview());

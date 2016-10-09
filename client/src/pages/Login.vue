@@ -4,6 +4,7 @@
   html {
     height: 100%;
   }
+  
   .page-login {
     background-color: #1abc9c;
     background-image: radial-gradient(circle farthest-side at center top, #55e7ca 0%, #1abc9c 100%);
@@ -46,14 +47,14 @@
               </label>
             </div>
             <div class="login-form-action clearfix">
-              <button type="submit" :disabled="!user.username || !user.password" class="btn btn-success pull-right green-btn">Log In &nbsp; <i class="fa fa-chevron-right"></i></button>
+              <button type="submit" :disabled="!user.username || !user.password" class="btn btn-success pull-right green-btn">Log In <i class="fa fa-chevron-right"></i></button>
             </div>
           </form>
         </div>
         <div class="login-form-links link1 animated fadeInLeftBig" data-animation="fadeInLeftBig" data-animation-delay=".2s" style="animation-delay: 0.2s;">
           <h4 class="blue">Don't have an Account?</h4>
           <span>No worry</span>
-          <a href="javascript:void(0)" class="blue">Click Here</a>
+          <router-link to="/register" class="blue">Click Here</router-link>
           <span>to Register</span>
         </div>
         <div class="login-form-links link2 animated fadeInRightBig" data-animation="fadeInRightBig" data-animation-delay=".4s" style="animation-delay: 0.4s;">

@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 import { auth } from './../services';
 
 import Login from './../pages/Login.vue';
+import Register from './../pages/Register.vue';
 
 import Layout from './../pages/Layout.vue';
 import Home from './../pages/Home.vue';
@@ -29,6 +30,7 @@ export const router = new VueRouter({
   base: __dirname,
   routes: [
     { path: '/login', component: Login },
+    { path: '/register', component: Register },
     {
       path: '/logout',
       beforeEnter(to, from, next) {

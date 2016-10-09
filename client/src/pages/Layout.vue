@@ -1,7 +1,4 @@
 <style>
-  .page-content {
-    margin-top: 50px;
-  }
 </style>
 <template>
   <div class="warpper">
@@ -16,11 +13,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-            <a class="navbar-brand" href="#">JS DOJO</a>
+            <a class="navbar-brand" href="/">JS DOJO</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-              <li class="nav-item active">
+              <li class="nav-item">
                 <router-link to="/square">Code square<span class="sr-only">(current)</span></router-link>
               </li>
               <li class="nav-item">
@@ -72,9 +69,7 @@
     },
     methods: {
       createCode(evt) {
-        eventBus.emit('test', 'aaa');
-        // this.$router.go('/abc');
-        alert('Create code');
+        this.$router.push('/');
       },
       updateCode(evt) {
         alert('Update code');
