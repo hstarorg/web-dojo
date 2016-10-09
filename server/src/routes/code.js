@@ -1,13 +1,14 @@
 let router = new Router();
-let userBiz = require('./../bizs/codeBiz');
+let codeBiz = require('./../bizs/codeBiz');
+let authBiz = require('./../bizs/authBiz');
 
-router.get('/:codeId');
+router.get('/:codeId', codeBiz.getCode);
 
 router.get('/:codeId/:rev');
 
-router.post('/');
+router.post('/', authBiz.validateUser, codeBiz.createCode);
 
-router.put('/:codeId');
+router.put('/:codeId', authBiz.validateUser, codeBiz.updateCode);
 
 module.exports = {
   priority: 0,

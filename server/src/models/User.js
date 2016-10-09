@@ -16,8 +16,8 @@ userSchema.methods.xxx = () => {
 };
 
 // 扩展静态方法： User.xxx();
-userSchema.statics.xxx = () => {
-
+userSchema.statics.findByToken = function (token, callback) {
+  return this.findOne({ token: token, expireTime: { $gt: Date.now() } }, callback);
 };
 
 // 扩展query方法: User.find().xxx();
