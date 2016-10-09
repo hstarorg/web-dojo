@@ -1,7 +1,8 @@
-let router = new Router();
-let userBiz = require('./../bizs/userBiz');
+const router = new Router();
+const userBiz = require('./../bizs/userBiz');
+const authBiz = require('./../bizs/authBiz');
 
-router.post('/', userBiz.doRegister);
+router.get('/codes', authBiz.validateUser, userBiz.getMyCodes);
 
 module.exports = {
   priority: 0,
