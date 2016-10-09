@@ -62,7 +62,10 @@ module.exports = {
 
   validateUser(req, res, next) {
     let token = req.headers['x-token'];
-    if (!token) return next(new BusError('Headers must include x-token.'));
+    if (!token) {
+      return res.send(new BusError('Headers must include x-token.'));
+    }
+    console.log('go');
     User.findByToken(token, (err, user) => {
       if (err) return next(err);
       if (!user) {

@@ -8,7 +8,7 @@ class BusError {
     } else if (typeof err === 'string') {
       this.message = err;
     } else {
-      this.message = JSON.parse(err);
+      this.message = '';
     }
   }
 }

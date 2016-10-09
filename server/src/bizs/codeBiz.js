@@ -8,7 +8,7 @@ module.exports = {
     let body = req.body;
     let code = new Code({
       userId: req.reqObj.userId, //所有者，
-      codeId: util.buildHash(req.reqObj.userId), //项目ID
+      codeId: util.buildHash(req.reqObj.userId, 12), //项目ID
       versionNo: 1, //项目版本
       codeName: body.codeName, //项目名称
       codeDescription: body.codeDescription || '', //项目描述信息
@@ -21,7 +21,7 @@ module.exports = {
     code.save((err, code) => {
       if (err) return next(err);
       res.status(201);
-      res.end();
+      res.send(code);
     })
   },
 
@@ -37,14 +37,17 @@ module.exports = {
     Code.update({ codeId: req.params.codeId }, updatedData, (err, code) => {
       if (err) return next(err);
       res.status(202);
-      res.end();
+      res.send(code);
     })
   },
 
   getCode(req, res, next) {
     let codeId = req.params.codeId;
-    Code.fineOne({ codeId: codeId }, (err, code) => {
+    Code.findOne({ codeId: codeId }, (err, code) => {
       if (err) return next(err);
+      if (!code) {
+        return res.send(new BusError('Code not exists.'));
+      }
       res.send(code);
     })
   }
