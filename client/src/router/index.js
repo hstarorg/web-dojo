@@ -43,7 +43,8 @@ export const router = new VueRouter({
       children: [
         { path: '', component: Code },
         { path: 'mycode', component: MyCode },
-        { path: 'square', component: Square }
+        { path: 'square', component: Square },
+        { path: ':id', component: Code }
       ]
     }
   ]

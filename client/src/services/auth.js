@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { ajax, storage } from './../common';
 
 export const auth = {
@@ -10,9 +11,15 @@ export const auth = {
         this.user = data.user;
         this._token = data.token;
         storage.local.set('x-token', data.token);
+        this._setHttpTokenHeader(data.token);
         this.isLogged = true;
         return this.isLogged;
       });
+  },
+
+
+  _setHttpTokenHeader(token) {
+    Vue.http.headers.common['x-token'] = token;
   },
 
   autoLogin(token) {
@@ -22,6 +29,7 @@ export const auth = {
           this.user = data.user;
           this._token = data.token;
           storage.local.set('x-token', data.token);
+          this._setHttpTokenHeader(data.token);
           this.isLogged = true;
           resolve(true);
         }).catch(reason => {

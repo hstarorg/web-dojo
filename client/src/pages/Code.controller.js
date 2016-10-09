@@ -1,4 +1,6 @@
 import { aceEditor } from './../components';
+import { eventBus, ajax } from './../common';
+
 export default {
   components: {
     aceEditor
@@ -6,7 +8,7 @@ export default {
   data() {
     return {
       jsCode: 'var a = 1;',
-      htmlCode:`<!DOCTYPE html>
+      htmlCode: `<!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -25,6 +27,7 @@ body{
   min-height: 100%;
 }`,
       editorHheight: 0,
+      codeId: undefined,
       moveObj: {
         startX: 0,
         isMoving: false
@@ -33,16 +36,21 @@ body{
   },
   created() {
     window.addEventListener('resize', this.setEditorHeight);
+
+    this.fetchCode();
   },
   mounted() {
     this.setEditorHeight();
+    eventBus.on('code.update', () => {
+      this.updateCode();
+    });
     // let slider = this.$el.querySelector('.container-slider > div');
     // slider.addEventListener('mousedown', this.onMousedown.bind(this));
     // document.addEventListener('mousemove', this.onMouseMove.bind(this));
     // document.addEventListener('mouseup', this.onMouseUp.bind(this));
     $(window).off('keydown').on('keydown', (evt) => {
       if (evt.keyCode === 83 && evt.ctrlKey) {
-        alert('save');
+        this.updateCode();
         return false;
       }
     });
@@ -83,11 +91,55 @@ body{
     runCode() {
       let iframeHtml = `<iframe id="previewFrame" frameborder="0" style="width: 100%;height: 100%;" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes"></iframe>`;
       this.$el.querySelector('.preview-container').innerHTML = iframeHtml;
-      let fd = document.getElementById('previewFrame').contentDocument; 
+      let fd = document.getElementById('previewFrame').contentDocument;
       fd.open();
       fd.write('');
       fd.write(this._buildHtmlCodeForPreview());
       fd.close();
+    },
+    updateCode() {
+      if (this.codeId) {
+        // Update
+        ajax.put(`${AppConf.apiHost}/code/${this.codeId}`, {
+          javascript: this.jsCode,
+          html: this.htmlCode,
+          css: this.cssCode
+        })
+          .then(data => {
+            alert('更新成功');
+            this.runCode();
+          });
+      } else {
+        //Save
+        ajax.post(`${AppConf.apiHost}/code`, {
+          javascript: this.jsCode,
+          html: this.htmlCode,
+          css: this.cssCode,
+          codeName: 'Test',
+          codeDescription: '',
+          codeTags: []
+        }).then(data => {
+          this.codeId = data.codeId;
+          this.$router.push(`/${data.codeId}`)
+          alert('保存成功!');
+          this.runCode();
+        });
+      }
+    },
+
+    fetchCode() {
+      this.codeId = this.$route.params.id;
+      if (this.codeId) {
+        ajax.get(`${AppConf.apiHost}/code/${this.codeId}`)
+          .then(code => {
+            this.htmlCode = code.html;
+            this.jsCode = code.javascript;
+            this.cssCode = code.css;
+            this.runCode();
+          }).catch(() => {
+            this.$router.push('/');
+          });
+      }
     }
   }
 };

@@ -1,4 +1,5 @@
 <style>
+
 </style>
 <template>
   <div class="warpper">
@@ -24,7 +25,7 @@
                 <a class="nav-link" href="#" @click.stop.prevent="createCode($event)">New</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" @click.stop.prevent="updateCode($event)">Update</a>
+                <a class="nav-link" href="#" @click.stop.prevent="updateCode($event)">Save|Update</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#" @click.stop.prevent="forkCode($event)">Fork</a>
@@ -72,7 +73,7 @@
         this.$router.push('/');
       },
       updateCode(evt) {
-        alert('Update code');
+        eventBus.emit('code.update');
       },
       forkCode(evt) {
         alert('Fork code');
