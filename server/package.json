@@ -1,6 +1,6 @@
 {
   "name": "web-dojo-server",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "server side for web-dojo",
   "main": "index.js",
   "scripts": {
