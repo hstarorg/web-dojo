@@ -2,6 +2,7 @@
 node_modules/
 dist/
 npm-debug.log
+client-publish/
 
 # Logs
 logs
