@@ -1,5 +1,5 @@
 <style>
-  .page-content{
+  .page-content {
     padding-top: 50px;
   }
 </style>
@@ -58,31 +58,6 @@
   </div>
 </template>
 <script>
-  import { eventBus } from './../common';
-  export default {
-    name: 'layout',
-    //Why use this? 要为每个组件创建自己独立的data实例。
-    data() {
-      return {
-        searchKey: 'abc'
-      };
-    },
-    mouted() {
-       eventBus.emit('test', 'aaa');
-    },
-    methods: {
-      createCode(evt) {
-        this.$router.push('/');
-      },
-      updateCode(evt) {
-        eventBus.emit('code.update');
-      },
-      forkCode(evt) {
-        alert('Fork code');
-      },
-      searchCode(evt) {
-        alert(`Search code：${this.searchKey}`);
-      }
-    }
-  };
+  import LayoutController from './Layout.controller';
+  export default LayoutController;
 </script>

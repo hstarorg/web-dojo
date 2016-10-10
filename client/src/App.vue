@@ -6,7 +6,9 @@
 
 <script>
 import { auth } from './services';
+import store from './store';
 export default {
+  store,
   data () {
     return {
       loggedIn: false //auth.loggedIn()
