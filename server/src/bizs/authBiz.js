@@ -55,7 +55,7 @@ module.exports = {
       user.save(err => {
         if (err) return next(err);
         res.status(201);
-        res.end();
+        res.send(true);
       });
     });
   },

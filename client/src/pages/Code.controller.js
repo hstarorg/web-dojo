@@ -126,7 +126,7 @@ export default {
           css: this.cssCode
         })
           .then(data => {
-            layer.msg('更新成功');
+            layer.msg('Save successfully.');
             this.runCode();
           });
       } else {
@@ -148,7 +148,7 @@ export default {
       }).then(data => {
         this.codeId = data.codeId;
         this.$router.push(`/${data.codeId}`)
-        layer.msg('保存成功!');
+        layer.msg('Create code successfully.');
         this.showsaveDialog = false;
         this.runCode();
       });

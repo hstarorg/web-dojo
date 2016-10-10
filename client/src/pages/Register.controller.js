@@ -1,4 +1,5 @@
-import { ajax } from './../common';
+import { ajax, layer } from './../common';
+
 export default {
   data() {
     return {
@@ -21,7 +22,10 @@ export default {
         password: this.user.password
       };
       ajax.post(`${AppConf.apiHost}/auth/register`, postData).then(data => {
-        this.$router.push('/login');
+        layer.msg('Register successfully.');
+        setTimeout(() => {
+          this.$router.push('/login');
+        }, 1500);
       });
     }
   }

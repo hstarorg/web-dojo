@@ -29,7 +29,7 @@ let _request = (method, url, data, options) => {
       })
       .then(data => {
         if (data.hasError) {
-          layer.msg(data.message);
+          layer.error(data.message);
           return reject(data);
         }
         resolve(data);
