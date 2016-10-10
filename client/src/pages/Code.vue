@@ -81,13 +81,13 @@
         <!-- Tab panes -->
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="htmlcode">
-            <ace-editor v-model="htmlCode" :mode="'html'" :theme="'monokai'" :height="editorHheight"></ace-editor>
+            <ace-editor v-model="htmlCode" :mode="'html'" :theme="'monokai'" :height="editorHeight"></ace-editor>
           </div>
           <div role="tabpanel" class="tab-pane" id="jscode">
-            <ace-editor v-model="jsCode" :mode="'javascript'" :theme="'monokai'" :height="editorHheight"></ace-editor>
+            <ace-editor v-model="jsCode" :mode="'javascript'" :theme="'monokai'" :height="editorHeight"></ace-editor>
           </div>
           <div role="tabpanel" class="tab-pane" id="csscode">
-            <ace-editor v-model="cssCode" :mode="'css'" :theme="'monokai'" :height="editorHheight"></ace-editor>
+            <ace-editor v-model="cssCode" :mode="'css'" :theme="'monokai'" :height="editorHeight"></ace-editor>
           </div>
         </div>
 

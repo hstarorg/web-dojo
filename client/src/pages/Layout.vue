@@ -24,13 +24,13 @@
                 <router-link to="/square">Code square<span class="sr-only">(current)</span></router-link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" @click.stop.prevent="createCode($event)">New</a>
+                <a class="nav-link" href="javascript:void(0);" @click.stop.prevent="createCode($event)">New</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" @click.stop.prevent="updateCode($event)">Save|Update</a>
+                <a class="nav-link" href="javascript:void(0);" @click.stop.prevent="updateCode($event)">{{ isNewCode ? 'Save' : 'Update' }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" @click.stop.prevent="forkCode($event)">Fork</a>
+                <a class="nav-link" href="javascript:void(0);" @click.stop.prevent="forkCode($event)">Fork</a>
               </li>
               <li class="nav-item">
                 <router-link to="/mycode">MyCode</router-link>
@@ -50,7 +50,9 @@
       </nav>
     </header>
     <div class="page-content">
-      <router-view></router-view>
+      <transition name="slide">
+        <router-view></router-view>
+      </transition>
     </div>
     <footer>
 

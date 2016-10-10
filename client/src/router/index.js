@@ -13,6 +13,8 @@ import Home from './../pages/Home.vue';
 import MyCode from './../pages/MyCode.vue';
 import Square from './../pages/Square.vue';
 import Code from './../pages/Code.vue';
+import NotFound from './../pages/NotFound.vue';
+import RedirectToCode from './../pages/RedirectToCode.vue';
 
 let requireAuth = (to, from, next) => {
   if (!auth.isLogged) {
@@ -42,17 +44,20 @@ export const router = new VueRouter({
       path: '/', component: Layout, meta: { auth: true },
       children: [
         { path: '', component: Code },
+        { path: 'new', component: RedirectToCode },
         { path: 'mycode', component: MyCode },
         { path: 'square', component: Square },
         { path: ':id', component: Code }
       ]
-    }
+    },
+    { path: '*', component: NotFound }
   ]
 });
 
 let isTheFirst = true;
 
 router.beforeEach((to, from, next) => {
+  layer.closeAll();
   if (to.matched.some(record => record.meta.auth)) {
     if (isTheFirst) {
       auth.autoLogin(auth.getLocalToken())

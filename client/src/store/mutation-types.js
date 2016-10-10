@@ -1,7 +1,5 @@
 export const types = {
-  ADD_TO_CART: 'ADD_TO_CART',
-  CHECKOUT_REQUEST: 'CHECKOUT_REQUEST',
-  CHECKOUT_SUCCESS: 'CHECKOUT_SUCCESS'
+  SET_CODE_STATUS: 'SET_CODE_STATUS'
 };
 
 export default types;

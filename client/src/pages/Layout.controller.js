@@ -1,5 +1,5 @@
 import { eventBus } from './../common';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'layout',
   //Why use this? 要为每个组件创建自己独立的data实例。
@@ -9,22 +9,30 @@ export default {
     };
   },
   mounted() {
-    eventBus.emit('test', 'aaa');
-    alert(this.a);
   },
-  computed: mapGetters([
-    'test'
-  ]),
+  computed: {
+    ...mapGetters([
+      'isNewCode'
+    ])
+  },
   methods: {
+    ...mapActions([
+      'setCodeStatus'
+    ]),
+
     createCode(evt) {
-      this.$router.push('/');
+      this.setCodeStatus(true);
+      this.$router.push('/new');
     },
+
     updateCode(evt) {
       eventBus.emit('code.update');
     },
+
     forkCode(evt) {
       alert('Fork code');
     },
+
     searchCode(evt) {
       alert(`Search code：${this.searchKey}`);
     }

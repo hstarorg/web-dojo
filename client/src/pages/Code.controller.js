@@ -1,3 +1,5 @@
+import { mapActions } from 'vuex';
+
 import { aceEditor } from './../components';
 import { eventBus, ajax } from './../common';
 
@@ -26,7 +28,7 @@ body{
   border: 1px solid red;
   min-height: 100%;
 }`,
-      editorHheight: 0,
+      editorHeight: 0,
       codeId: undefined,
       moveObj: {
         startX: 0,
@@ -35,15 +37,15 @@ body{
     }
   },
   created() {
+    console.log('abc');
     window.addEventListener('resize', this.setEditorHeight);
-
     this.fetchCode();
   },
   mounted() {
     this.setEditorHeight();
     eventBus.on('code.update', () => {
       this.updateCode();
-    });
+    }, this);
     // let slider = this.$el.querySelector('.container-slider > div');
     // slider.addEventListener('mousedown', this.onMousedown.bind(this));
     // document.addEventListener('mousemove', this.onMouseMove.bind(this));
@@ -62,6 +64,9 @@ body{
     // document.removeEventListener('mouseup', this.onMouseUp);
   },
   methods: {
+    ...mapActions([
+      'setCodeStatus'
+    ]), 
     onMousedown(e) {
       this.moveObj.startX = e.pageX;
       this.moveObj.isMoving = true;
@@ -79,15 +84,18 @@ body{
     onMouseUp(e) {
       this.moveObj.isMoving = false;
     },
+
     setEditorHeight() {
-      this.editorHheight = this.$el.querySelector('.editor-container').offsetHeight - 42;
+      this.editorHeight = this.$el.querySelector('.editor-container').offsetHeight - 42;
     },
+
     _buildHtmlCodeForPreview() {
       let html = this.htmlCode;
       html = html.replace(/<!--css-->/, `<style>${this.cssCode}</style>`);
       html = html.replace(/<!--js-->/, `<script>${this.jsCode}</script>`);
       return html;
     },
+
     runCode() {
       let iframeHtml = `<iframe id="previewFrame" frameborder="0" style="width: 100%;height: 100%;" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes"></iframe>`;
       this.$el.querySelector('.preview-container').innerHTML = iframeHtml;
@@ -106,7 +114,7 @@ body{
           css: this.cssCode
         })
           .then(data => {
-            alert('更新成功');
+            window.layer.msg('更新成功');
             this.runCode();
           });
       } else {
@@ -121,7 +129,7 @@ body{
         }).then(data => {
           this.codeId = data.codeId;
           this.$router.push(`/${data.codeId}`)
-          alert('保存成功!');
+          window.layer.msg('保存成功!');
           this.runCode();
         });
       }
@@ -135,6 +143,7 @@ body{
             this.htmlCode = code.html;
             this.jsCode = code.javascript;
             this.cssCode = code.css;
+            this.setCodeStatus(false);
             this.runCode();
           }).catch(() => {
             this.$router.push('/');

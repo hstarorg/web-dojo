@@ -1,5 +1,3 @@
 export const getters = {
-  test(state){
-    return 2;
-  }
+  isNewCode: state => state.isNewCode
 };

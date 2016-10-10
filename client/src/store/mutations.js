@@ -1,11 +1,11 @@
 import { types } from './mutation-types';
 
-export const store = {
+export const state = {
   isNewCode: true
 };
 
 export const mutations = {
-  [types.ADD_TO_CART](state, isNew) {
+  [types.SET_CODE_STATUS](state, isNew) {
     state.isNewCode = isNew;
   }
 };
