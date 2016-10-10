@@ -1,5 +1,5 @@
 <template>
-  <div id="js-dojo-app">
+  <div id="web-dojo-app">
     <router-view></router-view>
   </div>
 </template>

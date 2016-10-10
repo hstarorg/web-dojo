@@ -1,4 +1,4 @@
-# js-dojo
+# web-dojo
 
 A dojo website for JavaScript and more.
 
@@ -8,8 +8,8 @@ Used Bootstrap 4.0、Vue2、Monaco Editor and more.
 
 ## [/server](server)
 
-server-side for js-dojo, provider some rest api.
+server-side for web-dojo, provider some rest api.
 
 ## [/client](client)
 
-client-side for js-dojo.
+client-side for web-dojo.

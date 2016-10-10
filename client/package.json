@@ -1,7 +1,7 @@
 {
-  "name": "js-dojo-client",
+  "name": "web-dojo-client",
   "version": "0.0.1",
-  "description": "client side for js-dojo",
+  "description": "client side for web-dojo",
   "main": "index.html",
   "scripts": {
     "start": "npm run dev",
@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hstarorg/js-dojo.git"
+    "url": "git+https://github.com/hstarorg/web-dojo.git"
   },
   "bugs": {
-    "url": "https://github.com/hstarorg/js-dojo/issues"
+    "url": "https://github.com/hstarorg/web-dojo/issues"
   },
-  "homepage": "https://github.com/hstarorg/js-dojo#readme",
+  "homepage": "https://github.com/hstarorg/web-dojo#readme",
   "author": "Jay.M.Hu <hm910705@163.com>",
   "license": "MIT",
   "dependencies": {

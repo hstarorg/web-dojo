@@ -1,4 +1,4 @@
-# js-dojo-client
+# web-dojo-client
 
 XXX
 

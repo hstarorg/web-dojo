@@ -1,5 +1,5 @@
 <style>
-  #js-dojo-app,
+  #web-dojo-app,
   body,
   html {
     height: 100%;
@@ -26,7 +26,7 @@
         <div class="login-content animated bounceIn" data-animation="bounceIn">
           <form @submit.prevent="register()" autocomplete="off">
             <div class="section-title">
-              <h3>Join JS-DOJO</h3>
+              <h3>Join Web Dojo</h3>
             </div>
             <div class="textbox-wrap">
               <div class="input-group">
