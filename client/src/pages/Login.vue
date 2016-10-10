@@ -26,7 +26,7 @@
         <div class="login-content animated bounceIn" data-animation="bounceIn">
           <form @submit.prevent="login()">
             <div class="section-title">
-              <h3>JS-DOJO Log In</h3>
+              <h3>Web-Dojo Log In</h3>
             </div>
             <div class="textbox-wrap">
               <div class="input-group">
@@ -34,7 +34,8 @@
                 <input type="text" required="required" class="form-control" placeholder="Username" v-model="user.username">
               </div>
             </div>
-            <div class="textbox-wrap" :class="{focused: true}">
+            <!--<div class="textbox-wrap" :class="{focused: true}">-->
+            <div class="textbox-wrap">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-key"></i></span>
                 <input type="password" required="required" class="form-control " placeholder="Password" v-model="user.password" @click="">
@@ -68,30 +69,6 @@
   </div>
 </template>
 <script>
-import { auth } from './../services';
-export default {
-  replace: true,
-  data() {
-    return {
-      user: {
-        username: 'admin',
-        password: ''
-      },
-      remember: false,
-      error: false
-    }
-  },
-  methods: {
-    login () {
-      auth.login(this.user.username, this.user.password)
-      .then(loggedIn => {
-        if (!loggedIn) {
-          this.error = true
-        } else {
-          this.$router.push(this.$route.query.redirect || '/')
-        }
-      });
-    }
-  }
-}
+  import LoginController from './Login.controller.js';
+  export default LoginController;
 </script>

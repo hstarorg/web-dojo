@@ -1,43 +1,41 @@
 import { mapActions } from 'vuex';
 
-import { aceEditor } from './../components';
-import { eventBus, ajax } from './../common';
+import { aceEditor, modal } from './../components';
+import { eventBus, ajax, layer } from './../common';
+import { codeTemplates } from './../services';
 
 export default {
   components: {
-    aceEditor
+    aceEditor,
+    modal
   },
   data() {
     return {
-      jsCode: 'var a = 1;',
-      htmlCode: `<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Good</title>
-    <!--css-->
-  </head>
-  <body>
-    <!--js-->
-  </body>
-</html>`,
-      cssCode: `html{
-  height: 100%;
-}
-body{
-  border: 1px solid red;
-  min-height: 100%;
-}`,
+      jsCode: '',
+      htmlCode: '',
+      cssCode: '',
       editorHeight: 0,
       codeId: undefined,
+      showsaveDialog: false,
+      templates: [
+        { name: 'normal', text: 'Normal' },
+        { name: 'angular', text: 'Angular' },
+        { name: 'vue', text: 'Vue' },
+        { name: 'vue2', text: 'Vue2' },
+      ],
       moveObj: {
         startX: 0,
         isMoving: false
+      },
+      codeObj: {
+        codeName: '',
+        codeDescription: '',
+        codeTags: '',
+        isPrivate: false
       }
     }
   },
   created() {
-    console.log('abc');
     window.addEventListener('resize', this.setEditorHeight);
     this.fetchCode();
   },
@@ -63,6 +61,11 @@ body{
     // document.removeEventListener('mousemove', this.onMouseMove);
     // document.removeEventListener('mouseup', this.onMouseUp);
   },
+  watch: {
+    showsaveDialog(newVal) {
+      this.$el.style.zIndex = newVal ? 1030 : 0;
+    }
+  },
   methods: {
     ...mapActions([
       'setCodeStatus'
@@ -70,6 +73,15 @@ body{
     onMousedown(e) {
       this.moveObj.startX = e.pageX;
       this.moveObj.isMoving = true;
+    },
+    changeTemplate(templateName) {
+      let template = codeTemplates[templateName];
+      this.jsCode = template.javascript;
+      this.htmlCode = template.html;
+      this.cssCode = template.css;
+      this.$nextTick(function () {
+        this.runCode();
+      });
     },
     onMouseMove(e) {
       if (!this.moveObj.isMoving) {
@@ -91,8 +103,8 @@ body{
 
     _buildHtmlCodeForPreview() {
       let html = this.htmlCode;
-      html = html.replace(/<!--css-->/, `<style>${this.cssCode}</style>`);
-      html = html.replace(/<!--js-->/, `<script>${this.jsCode}</script>`);
+      html = html.replace(/<!--dojo-css-->/, `<style>${this.cssCode}</style>`);
+      html = html.replace(/<!--dojo-js-->/, `<script>${this.jsCode}</script>`);
       return html;
     },
 
@@ -114,25 +126,32 @@ body{
           css: this.cssCode
         })
           .then(data => {
-            window.layer.msg('更新成功');
+            layer.msg('更新成功');
             this.runCode();
           });
       } else {
-        //Save
-        ajax.post(`${AppConf.apiHost}/code`, {
-          javascript: this.jsCode,
-          html: this.htmlCode,
-          css: this.cssCode,
-          codeName: 'Test',
-          codeDescription: '',
-          codeTags: []
-        }).then(data => {
-          this.codeId = data.codeId;
-          this.$router.push(`/${data.codeId}`)
-          window.layer.msg('保存成功!');
-          this.runCode();
-        });
+        // Show Save Dialog
+        this.showsaveDialog = true;
+        return;
       }
+    },
+
+    createCode() {
+      ajax.post(`${AppConf.apiHost}/code`, {
+        javascript: this.jsCode,
+        html: this.htmlCode,
+        css: this.cssCode,
+        codeName: this.codeObj.codeName,
+        codeDescription: this.codeObj.codeDescription || '',
+        codeTags: this.codeObj.codeTags.split(' ').filter(x => !!x),
+        isPrivate: this.codeObj.isPrivate
+      }).then(data => {
+        this.codeId = data.codeId;
+        this.$router.push(`/${data.codeId}`)
+        layer.msg('保存成功!');
+        this.showsaveDialog = false;
+        this.runCode();
+      });
     },
 
     fetchCode() {
@@ -148,6 +167,8 @@ body{
           }).catch(() => {
             this.$router.push('/');
           });
+      } else {
+        this.changeTemplate('normal');
       }
     }
   }

@@ -1,4 +1,4 @@
-import { eventBus } from './../common';
+import { eventBus, storage } from './../common';
 import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'layout',
@@ -12,7 +12,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'isNewCode'
+      'isNewCode',
+      'userInfo'
     ])
   },
   methods: {
@@ -35,6 +36,11 @@ export default {
 
     searchCode(evt) {
       alert(`Search code：${this.searchKey}`);
+    },
+
+    logout() {
+      storage.local.remove('x-token');
+      this.$router.push('/login');
     }
   }
 };

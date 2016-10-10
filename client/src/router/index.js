@@ -3,13 +3,13 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
+import { layer } from './../common';
 import { auth } from './../services';
 
 import Login from './../pages/Login.vue';
 import Register from './../pages/Register.vue';
 
 import Layout from './../pages/Layout.vue';
-import Home from './../pages/Home.vue';
 import MyCode from './../pages/MyCode.vue';
 import Square from './../pages/Square.vue';
 import Code from './../pages/Code.vue';

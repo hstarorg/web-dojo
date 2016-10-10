@@ -16,35 +16,40 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-            <a class="navbar-brand" href="/">JS DOJO</a>
+            <a class="navbar-brand" href="/">WEB DOJO</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-              <li class="nav-item">
+              <!--<li class="nav-item">
                 <router-link to="/square">Code square<span class="sr-only">(current)</span></router-link>
-              </li>
+              </li>-->
               <li class="nav-item">
                 <a class="nav-link" href="javascript:void(0);" @click.stop.prevent="createCode($event)">New</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="javascript:void(0);" @click.stop.prevent="updateCode($event)">{{ isNewCode ? 'Save' : 'Update' }}</a>
               </li>
-              <li class="nav-item">
+              <!--<li class="nav-item">
                 <a class="nav-link" href="javascript:void(0);" @click.stop.prevent="forkCode($event)">Fork</a>
-              </li>
+              </li>-->
               <li class="nav-item">
                 <router-link to="/mycode">MyCode</router-link>
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Dashboard</a></li>
-              <li><a href="#">Settings</a></li>
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">Help</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Welcome, <span>{{ userInfo.username }}</span> <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Settings</a></li>
+                  <li class="divider"></li>
+                  <!--<li class="dropdown-header">Nav header</li>-->
+                  <li @click.prevent="logout()"><a href="#">Log out</a></li>
+                </ul>
+              </li>
             </ul>
-            <form class="navbar-form navbar-right">
+            <!--<form class="navbar-form navbar-right">
               <input type="text" class="form-control" placeholder="Search...">
-            </form>
+            </form>-->
           </div>
         </div>
       </nav>

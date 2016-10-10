@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { ajax, storage } from './../common';
+import { ajax, storage, eventBus } from './../common';
 
 export const auth = {
   isLogged: false,
@@ -13,6 +13,7 @@ export const auth = {
         storage.local.set('x-token', data.token);
         this._setHttpTokenHeader(data.token);
         this.isLogged = true;
+        eventBus.emit('user.logined');
         return this.isLogged;
       });
   },
@@ -24,6 +25,9 @@ export const auth = {
 
   autoLogin(token) {
     return new Promise((resolve, reject) => {
+      if (!token) {
+        return resolve(false);
+      }
       ajax.post(`${AppConf.apiHost}/auth/autologin`, { token: token })
         .then(data => {
           this.user = data.user;
@@ -31,6 +35,7 @@ export const auth = {
           storage.local.set('x-token', data.token);
           this._setHttpTokenHeader(data.token);
           this.isLogged = true;
+          eventBus.emit('user.logined');
           resolve(true);
         }).catch(reason => {
           resolve(false);

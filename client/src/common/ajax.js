@@ -2,6 +2,8 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 Vue.use(VueResource);
 
+import { layer } from './layer';
+
 const HTTP_TIMEOUT = 1000 * 60; // 请求超时时间1分钟
 
 let _buildOptions = (method, options) => {
@@ -27,7 +29,7 @@ let _request = (method, url, data, options) => {
       })
       .then(data => {
         if (data.hasError) {
-          alert(data.message);
+          layer.msg(data.message);
           return reject(data);
         }
         resolve(data);

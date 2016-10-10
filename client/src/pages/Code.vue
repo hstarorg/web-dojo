@@ -5,6 +5,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    /*z-index: 1030;*/
     .code-tool-bar {
       height: 40px;
       border-bottom: 1px solid lightgray;
@@ -44,29 +45,25 @@
       height: 100%;
       overflow-y: hidden;
     }
+    .run-code {}
   }
 </style>
 <template>
   <div class="page-code">
     <div class="code-tool-bar">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-6">
           <div class="btn-group btn-group-sm">
-            <button type="button" class="btn btn-primary">选择模板：Normal</button>
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              选择模板
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Normal</a></li>
-              <li><a href="#">Angular1</a></li>
-              <li><a href="#">Vue1.0.26</a></li>
-              <li><a href="#">Vue2.x</a></li>
+              <li v-for="item in templates" @click="changeTemplate(item.name)"><a href="#">{{ item.text }}</a></li>
             </ul>
           </div>
-        </div>
-        <div class="col-md-2">
-          <button class="btn btn-sm btn-danger" @click.prevent="runCode()">Run Code</button>
+          <button class="btn btn-sm btn-danger pull-right" @click.prevent="runCode()">Run Code</button>
         </div>
       </div>
     </div>
@@ -100,6 +97,31 @@
           scrolling="yes" allowtransparency="yes"></iframe>-->
       </div>
     </div>
+    <modal :title="'Save Code'" v-model="showsaveDialog" effect="zoom" width="400" :backdrop="false">
+      <div slot="modal-body" class="modal-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="codeName">Code name</label>
+            <input type="text" class="form-control" id="codeName" placeholder="Code name" required v-model="codeObj.codeName">
+          </div>
+          <div class="form-group">
+            <label for="codeTags">Code tags</label>
+            <input type="text" class="form-control" id="codeTags" placeholder="Code tags" required v-model="codeObj.codeTags">
+          </div>
+          <div class="form-group">
+            <label for="codeDescription">Code Description</label>
+            <textarea id="codeDescription" cols="30" rows="5" class="form-control" v-model="codeObj.codeDescription"></textarea>
+          </div>
+        </form>
+      </div>
+      <div slot="modal-footer" class="modal-footer">
+        <div class="checkbox pull-left">
+          <label><input type="checkbox" class="pull-left" v-model="codeObj.isPrivate">Set Private</label>
+        </div>
+        <button type="button" class="btn btn-default" @click="showsaveDialog = false">Cancel</button>
+        <button type="submit" class="btn btn-success" @click="createCode()">Save Code</button>
+      </div>
+    </modal>
   </div>
 </template>
 <script>
