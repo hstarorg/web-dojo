@@ -18,6 +18,11 @@
     position: relative;
     box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3);
   }
+  .remember-box{
+    float: left;
+    width: auto !important;
+    margin-top: 2.5px !important;
+  }
 </style>
 <template>
   <div class="page-login eternity-form">
@@ -41,10 +46,9 @@
                 <input type="password" required="required" class="form-control " placeholder="Password" v-model="user.password" @click="">
               </div>
             </div>
-            <div></div>
-            <div class="input-group">
+            <div class="textbox-wrap">
               <label>
-                  <input type="checkbox" v-model="remember">&nbsp;Remember Me
+                <input class="remember-box" type="checkbox" v-model="remember">&nbsp;Remember Me
               </label>
             </div>
             <div class="login-form-action clearfix">

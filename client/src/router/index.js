@@ -28,7 +28,7 @@ let requireAuth = (to, from, next) => {
 };
 
 export const router = new VueRouter({
-  mode: 'hash',
+  mode: 'history',
   base: __dirname,
   routes: [
     { path: '/login', component: Login },
