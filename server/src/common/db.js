@@ -1,5 +1,7 @@
-let mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test', {
+const mongoose = require('mongoose');
+const config = require('./../config');
+
+mongoose.connect(config.mongoAddress, {
   db: { native_parser: true },
   server: { poolSize: 5 }
 });
