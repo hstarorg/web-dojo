@@ -2,7 +2,7 @@
 
 A dojo website for JavaScript and more.
 
-Used Bootstrap 4.0、Vue2、Monaco Editor and more.
+Used Bootstrap 3、Vue2、Ace Editor and more.
 
 # Two Parts
 
