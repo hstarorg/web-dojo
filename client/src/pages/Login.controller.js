@@ -12,7 +12,8 @@ export default {
         password: ''
       },
       remember: false,
-      error: false
+      error: false，
+      isLogining: false
     }
   },
   created() {
@@ -24,14 +25,18 @@ export default {
   },
   methods: {
     login() {
+      this.isLogining = true;
       auth.login(this.user.username, this.user.password)
         .then(loggedIn => {
           if (!loggedIn) {
-            this.error = true
+            this.error = true;
+            this.isLogining = false;
           } else {
             this.rememberUser();
-            this.$router.push(this.$route.query.redirect || '/')
+            this.$router.push(this.$route.query.redirect || '/');
           }
+        }).catch(() => {
+          this.isLogining = false;
         });
     },
 

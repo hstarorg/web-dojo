@@ -52,7 +52,7 @@
               </label>
             </div>
             <div class="login-form-action clearfix">
-              <button type="submit" :disabled="!user.username || !user.password" class="btn btn-success pull-right green-btn">Log In <i class="fa fa-chevron-right"></i></button>
+              <button type="submit" :disabled="!user.username || !user.password || isLogining" class="btn btn-success pull-right green-btn">Log In <i class="fa fa-chevron-right"></i></button>
             </div>
           </form>
         </div>
