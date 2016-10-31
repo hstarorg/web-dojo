@@ -1,9 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 0.1.2 (2016-10-x)
+## 0.2.0 (2016-10-31)
 
 - 优化登录逻辑（避免多次点击登录按钮）
+- 增加Console Panel
+- 增加预览状态提醒
+- 增加jQuery模板
+- 改进Vue模板，修改为默认引入三大核心组件
 
 ## 0.1.1 (2016-10-12)
 
