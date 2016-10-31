@@ -10,6 +10,9 @@
       height: 40px;
       border-bottom: 1px solid lightgray;
       padding-top: 5px;
+      .preview-loading{
+        line-height: 30px;
+      }
     }
     .code-editor-container {
       position: absolute;
@@ -65,6 +68,9 @@
           </div>
           <button class="btn btn-sm btn-danger pull-right" @click.prevent="runCode()">Run Code</button>
         </div>
+        <div class="col-md-6">
+          <span class="text-danger preview-loading" v-show="previewLoading">Preview is loading...</span>
+        </div>
       </div>
     </div>
     <div class="code-editor-container">
@@ -105,7 +111,7 @@
             <input type="text" class="form-control" id="codeName" placeholder="Code name" required v-model="codeObj.codeName">
           </div>
           <div class="form-group">
-            <label for="codeTags">Code tags</label>
+            <label for="codeTags">Code tags(逗号分割)</label>
             <input type="text" class="form-control" id="codeTags" placeholder="Code tags" required v-model="codeObj.codeTags">
           </div>
           <div class="form-group">

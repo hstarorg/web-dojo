@@ -18,6 +18,8 @@ export default {
       codeId: undefined,
       showsaveDialog: false,
       templates: [],
+      previewLoading: false, // 预览正在加载中
+      startLoadingTime: 0, // 开始加载时间
       moveObj: {
         startX: 0,
         isMoving: false
@@ -107,9 +109,18 @@ export default {
     },
 
     runCode() {
+      this.previewLoading = true;
+      this.startLoadingTime = Date.now();
       let iframeHtml = `<iframe id="previewFrame" frameborder="0" style="width: 100%;height: 100%;" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes"></iframe>`;
       this.$el.querySelector('.preview-container').innerHTML = iframeHtml;
-      let fd = document.getElementById('previewFrame').contentDocument;
+      let iframe = document.getElementById('previewFrame');
+      let fd = iframe.contentDocument;
+      $(iframe).on('load', e => {
+        let timespan = Date.now() - this.startLoadingTime; // 单位ms
+        setTimeout(() => {
+          this.previewLoading = false;
+        }, timespan > 1000 ? 0 : 1000 - timespan);
+      });
       fd.open();
       fd.write('');
       fd.write(this._buildHtmlCodeForPreview());
@@ -141,7 +152,7 @@ export default {
         css: this.cssCode,
         codeName: this.codeObj.codeName,
         codeDescription: this.codeObj.codeDescription || '',
-        codeTags: this.codeObj.codeTags.split(' ').filter(x => !!x),
+        codeTags: this.codeObj.codeTags.split(',').filter(x => !!x),
         isPrivate: this.codeObj.isPrivate
       }).then(data => {
         this.codeId = data.codeId;
