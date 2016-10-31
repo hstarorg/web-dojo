@@ -103,8 +103,8 @@ export default {
 
     _buildHtmlCodeForPreview() {
       let html = this.htmlCode;
-      html = html.replace(/<!--dojo-css-->/, `<style>${this.cssCode}</style>`);
-      html = html.replace(/<!--dojo-js-->/, `<script>${this.jsCode}</script>`);
+      html = html.replace(/<\/head>/, `<style>${this.cssCode}</style></head>`);
+      html = html.replace(/<\/body>/, `<script>${this.jsCode}</script></body>`);
       return html;
     },
 
