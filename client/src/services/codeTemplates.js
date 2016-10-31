@@ -10,17 +10,15 @@ export const codeTemplates = {
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Good</title>
-    <!-- 请不要删除以下标记，用于加载CSS -->
-    <!--dojo-css-->
+    <title>Web Dojo Code</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vuex/1.0.0/vuex.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue-router/0.7.13/vue-router.js"></script>
   </head>
   <body>
     <div id="app">
       <h1>{{ message }}</h1>
     </div>
-    <!-- 请不要删除以下标记，用于加载JS -->
-    <!--dojo-js-->
   </body>
 </html>`,
     css: ``
@@ -36,20 +34,37 @@ export const codeTemplates = {
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Good</title>
-    <!-- 请不要删除以下标记，用于加载CSS -->
-    <!--dojo-css-->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+    <title>Web Dojo Code</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vuex/2.0.0/vuex.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue-router/2.0.1/vue-router.js"></script>
   </head>
   <body>
     <div id="app">
       <h1>{{ message }}</h1>
     </div>
-    <!-- 请不要删除以下标记，用于加载JS -->
-    <!--dojo-js-->
   </body>
 </html>`,
     css: ``
+  },
+  jquery: {
+    javascript: `$(function() {
+  //do something
+});`,
+    html: `<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Web Dojo Code</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+  </head>
+  <body>
+    <div>
+      <h1>Hello Dojo(jQuery)</h1>
+    </div>
+  </body>
+</html>`,
+    css: ''
   },
   normal: {
     javascript: ``,
@@ -57,16 +72,12 @@ export const codeTemplates = {
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Good</title>
-    <!-- 请不要删除以下标记，用于加载CSS -->
-    <!--dojo-css-->
+    <title>Web Dojo Code</title>
   </head>
   <body>
     <div>
       <h1>Hello Dojo</h1>
     </div>
-    <!-- 请不要删除以下标记，用于加载JS -->
-    <!--dojo-js-->
   </body>
 </html>`,
     css: ``
@@ -83,16 +94,12 @@ angular.bootstrap(document, ['app']);`,
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Good</title>
-    <!-- 请不要删除以下标记，用于加载CSS -->
-    <!--dojo-css-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
   </head>
   <body>
     <div ng-controller="DefaultController">
       <h1>{{ message }}</h1>
     </div>
-    <!-- 请不要删除以下标记，用于加载JS -->
-    <!--dojo-js-->
   </body>
 </html>`,
     css: ``

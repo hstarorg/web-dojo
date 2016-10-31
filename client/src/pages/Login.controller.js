@@ -12,7 +12,7 @@ export default {
         password: ''
       },
       remember: false,
-      error: false，
+      error: false,
       isLogining: false
     }
   },

@@ -17,12 +17,7 @@ export default {
       editorHeight: 0,
       codeId: undefined,
       showsaveDialog: false,
-      templates: [
-        { name: 'normal', text: 'Normal' },
-        { name: 'angular', text: 'Angular' },
-        { name: 'vue', text: 'Vue' },
-        { name: 'vue2', text: 'Vue2' },
-      ],
+      templates: [],
       moveObj: {
         startX: 0,
         isMoving: false
@@ -37,6 +32,9 @@ export default {
   },
   created() {
     window.addEventListener('resize', this.setEditorHeight);
+    this.templates = Object.keys(codeTemplates).map(x => {
+      return { name: x, text: `${x[0].toUpperCase()}${x.substring(1)}` };
+    });
     this.fetchCode();
   },
   mounted() {
