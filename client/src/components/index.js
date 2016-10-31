@@ -1,5 +1,9 @@
-import _aceEditor from './ace-editor/aceEditor.vue';
-export const aceEditor = _aceEditor;
+import aceEditor from './ace-editor/aceEditor.vue';
+import modal from './modal/modal.vue';
+import console from './console/console.vue';
 
-import _modal from './modal/modal.vue';
-export const modal = _modal;
+export {
+  aceEditor,
+  modal,
+  console
+};

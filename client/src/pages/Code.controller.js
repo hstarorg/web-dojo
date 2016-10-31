@@ -1,13 +1,14 @@
 import { mapActions } from 'vuex';
 
-import { aceEditor, modal } from './../components';
+import { aceEditor, modal, console } from './../components';
 import { eventBus, ajax, layer } from './../common';
 import { codeTemplates } from './../services';
 
 export default {
   components: {
     aceEditor,
-    modal
+    modal,
+    console
   },
   data() {
     return {
@@ -29,15 +30,25 @@ export default {
         codeDescription: '',
         codeTags: '',
         isPrivate: false
+      },
+      logConsole: {
+        shown: false,
+        logList: [],
+        unreadCount: 0
       }
     }
   },
   created() {
+    let self = this;
     window.addEventListener('resize', this.setEditorHeight);
     this.templates = Object.keys(codeTemplates).map(x => {
       return { name: x, text: `${x[0].toUpperCase()}${x.substring(1)}` };
     });
     this.fetchCode();
+    window.addEventListener('message', function (evt) {
+      if (!evt.data || !evt.data.funName) return;
+      self.logConsole.logList.push(evt.data);
+    }, false);
   },
   mounted() {
     this.setEditorHeight();
@@ -103,7 +114,8 @@ export default {
 
     _buildHtmlCodeForPreview() {
       let html = this.htmlCode;
-      html = html.replace(/<\/head>/, `<style>${this.cssCode}</style></head>`);
+      html = html.replace(/<head>/, `<head><script src="/static/vendor/console.mock.js"></script>`)
+        .replace(/<\/head>/, `<style>${this.cssCode}</style></head>`);
       html = html.replace(/<\/body>/, `<script>${this.jsCode}</script></body>`);
       return html;
     },
@@ -179,6 +191,10 @@ export default {
       } else {
         this.changeTemplate('normal');
       }
+    },
+
+    toggleConsole() {
+      this.logConsole.shown = !this.logConsole.shown;
     }
   }
 };
