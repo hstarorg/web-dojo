@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.2.1 (2016-11-3)
+
+- 把系统中的汉字替换为英文
+- 升级依赖包版本
+- 分离多环境配置，打包时直接引用对应环境配置
+
 ## 0.2.0 (2016-10-31)
 
 - 优化登录逻辑（避免多次点击登录按钮）
