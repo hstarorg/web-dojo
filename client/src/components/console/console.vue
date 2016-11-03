@@ -19,7 +19,7 @@
 			line-height: 30px;
 			cursor: move;
 			padding-left: 5px;
-			.icon-minisize {
+			.console-minisize {
 				font-size: 1.5em;
 				height: 30px;
 				line-height: 30px;
@@ -28,6 +28,9 @@
 				&:hover {
 					color: green;
 				}
+			}
+			.conosle-clear {
+				margin-top: 4px;
 			}
 		}
 		.dojo-console-body {
@@ -46,12 +49,13 @@
 	<div class="dojo-console minisize">
 		<div class="dojo-console-header">
 			Dojo Console
-			<i class="fa fa-minus-square-o icon-minisize pull-right" @click="minisize()"></i>
+			<i class="fa fa-minus-square-o console-minisize pull-right" @click="minisize()"></i>
+			<button class="btn btn-xs btn-danger pull-right conosle-clear" @click.stop="clear()">Clear</button>
 		</div>
 		<div class="dojo-console-body">
 			<ul>
-				<li v-for="item in value.logList">
-					[{{item.funName}}] {{item.data.join(' ')}}
+				<li v-for="item in value.logList" :class="{'text-danger': item.funName === 'error'}">
+					<span>[{{item.funName}}]</span> {{item.data.join(' ')}}
 				</li>
 			</ul>
 		</div>

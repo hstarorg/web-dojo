@@ -48,7 +48,6 @@ export default {
     initHeaderEvents() {
       let self = this;
       this.$header.on('mousedown', function (e) {
-        console.log('down');
         let offset = self.$header.offset();
         Object.assign(self.moveObj, {
           startMoving: true,
@@ -83,6 +82,10 @@ export default {
       $(this.$el).removeClass('minisize');
       this.value.unreadCount = 0;
       this.$emit('input', this.value);
+    },
+    clear() {
+      console.log('clear');
+      this.value.logList = [];
     }
   }
 };
