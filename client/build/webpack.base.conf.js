@@ -1,11 +1,18 @@
-var path = require('path')
-var config = require('../config')
-var utils = require('./utils')
-var projectRoot = path.resolve(__dirname, '../')
+var path = require('path');
+var config = require('../config');
+var utils = require('./utils');
+var projectRoot = path.resolve(__dirname, '../');
+
+let appArr = ['./src/main.js'];
+if (process.env.NODE_ENV === 'production') {
+  appArr.unshift('./src/config/config.prod.js');
+} else {
+  appArr.unshift('./src/config/config.dev.js')
+}
 
 module.exports = {
   entry: {
-    app: './src/main.js'
+    app: appArr
   },
   output: {
     path: config.build.assetsRoot,
