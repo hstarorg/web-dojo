@@ -63,7 +63,7 @@
 				<div class="col-md-6">
 					<div class="btn-group btn-group-sm">
 						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-              选择模板
+              Select template
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
@@ -118,7 +118,7 @@
 						<input type="text" class="form-control" id="codeName" placeholder="Code name" required v-model="codeObj.codeName">
 					</div>
 					<div class="form-group">
-						<label for="codeTags">Code tags(逗号分割)</label>
+						<label for="codeTags">Code tags(split by ,)</label>
 						<input type="text" class="form-control" id="codeTags" placeholder="Code tags" required v-model="codeObj.codeTags">
 					</div>
 					<div class="form-group">
