@@ -137,7 +137,4 @@
 		</modal>
 	</div>
 </template>
-<script>
-  import CodeController from './Code.controller.js';
-  export default CodeController;
-</script>
+<script src="./Code.controller.js"></script>

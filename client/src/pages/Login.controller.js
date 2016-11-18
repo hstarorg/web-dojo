@@ -4,7 +4,6 @@ import { storage } from './../common';
 const rememberKey = 'dojo-user-name';
 
 export default {
-  replace: true,
   data() {
     return {
       user: {

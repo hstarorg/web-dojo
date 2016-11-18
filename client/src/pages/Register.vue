@@ -61,7 +61,4 @@
     </div>
   </div>
 </template>
-<script>
-  import RegisterController from './Register.controller.js';
-  export default RegisterController;
-</script>
+<script src="./Register.controller.js"></script>

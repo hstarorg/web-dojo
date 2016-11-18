@@ -1,15 +1,22 @@
 import { types } from './mutation-types';
 
 export const state = {
-  isNewCode: true,
+  isLogged: false,
+  token: '',
   userInfo: {
     username: ''
-  }
+  },
+  isNewCode: true
 };
 
 export const mutations = {
   [types.SET_CODE_STATUS](state, isNew) {
     state.isNewCode = isNew;
+  },
+
+  [types.SET_USER_TOKEN](state, token) {
+    state.isLogged = !!token;
+    state.token = token;
   },
 
   [types.SET_USER_INFO](state, userInfo) {

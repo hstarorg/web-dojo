@@ -32,7 +32,4 @@
     </table>
   </div>
 </template>
-<script>
-  import MyCodeController from './MyCode.controller.js';
-  export default MyCodeController;
-</script>
+<script src="./MyCode.controller.js"></script>

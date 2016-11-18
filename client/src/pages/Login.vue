@@ -72,7 +72,4 @@
     </div>
   </div>
 </template>
-<script>
-  import LoginController from './Login.controller.js';
-  export default LoginController;
-</script>
+<script src="./Login.controller.js"></script>

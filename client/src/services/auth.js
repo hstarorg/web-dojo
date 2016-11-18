@@ -1,65 +1,61 @@
-import Vue from 'vue';
+import store from './../store';
+import types from './../store/mutation-types';
 import { ajax, storage, eventBus } from './../common';
 
 export const auth = {
-  isLogged: false,
-  user: {},
-  _token: '',
+  requireAuthFirst: true,
+
+  _processLoginData(data, isAutoLogin) {
+    storage.local.set('x-token', data.token);
+    store.commit(types.SET_USER_TOKEN, data.token);
+    store.commit(types.SET_USER_INFO, data.user);
+    ajax.setCommonHeader('x-token', data.token);
+    eventBus.emit('$loginSucceed');
+  },
+
   login(username, password) {
-    return ajax.post(`${AppConf.apiHost}/auth/login`, { username: username, password: password })
+    return ajax.post(`${AppConf.apiHost}/auth/login`, { username, password })
       .then(data => {
-        this.user = data.user;
-        this._token = data.token;
-        storage.local.set('x-token', data.token);
-        this._setHttpTokenHeader(data.token);
-        this.isLogged = true;
-        eventBus.emit('user.logined');
-        return this.isLogged;
+        this._processLoginData(data);
+        return true;
       });
   },
 
-
-  _setHttpTokenHeader(token) {
-    Vue.http.headers.common['x-token'] = token;
+  autoLogin() {
+    let token = storage.local.get('x-token');
+    if (!token) {
+      return Promise.resolve();
+    }
+    return ajax.post(`${AppConf.apiHost}/auth/autologin`, { token })
+      .then(data => {
+        this._processLoginData(data, true);
+        return true;
+      });
   },
 
-  autoLogin(token) {
-    return new Promise((resolve, reject) => {
-      if (!token) {
-        return resolve(false);
+  requireAuth(to, from, next) {
+    let p = Promise.resolve();
+    if (this.requireAuthFirst) {
+      this.requireAuthFirst = false;
+      p = this.autoLogin();
+    }
+    p.then(() => {
+      if (!store.state.isLogged) {
+        return next({ path: '/login', query: { redirect: to.fullPath } });
       }
-      ajax.post(`${AppConf.apiHost}/auth/autologin`, { token: token })
-        .then(data => {
-          this.user = data.user;
-          this._token = data.token;
-          storage.local.set('x-token', data.token);
-          this._setHttpTokenHeader(data.token);
-          this.isLogged = true;
-          eventBus.emit('user.logined');
-          resolve(true);
-        }).catch(reason => {
-          resolve(false);
-        });
+      next();
     });
   },
 
-  getToken() {
-    return this._token;
-  },
-
   getLocalToken() {
-    return localStorage.getItem('x-token');
+    return store.local.get('x-token');
   },
 
   logout() {
-    this.isLogged = false;
+    store.commit(types.SET_USER_TOKEN, '');
   },
 
-  loggedIn() {
-    return !!localStorage.token
-  },
-
-  onChange() {
-
+  isLogged() {
+    return store.state.isLogged;
   }
 };

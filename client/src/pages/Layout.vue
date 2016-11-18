@@ -35,15 +35,18 @@
               <li class="nav-item">
                 <router-link to="/mycode">MyCode</router-link>
               </li>
+              <li class="nav-item">
+                <router-link to="/mygist">MyGist</router-link>
+              </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Welcome, <span>{{ userInfo.username }}</span> <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Settings</a></li>
+                  <li><a href="javascript:void(0);">Settings</a></li>
                   <li class="divider"></li>
                   <!--<li class="dropdown-header">Nav header</li>-->
-                  <li @click.prevent="logout()"><a href="#">Log out</a></li>
+                  <li @click.prevent="logout()"><a href="javascript:void(0);">Log out</a></li>
                 </ul>
               </li>
             </ul>
@@ -64,7 +67,4 @@
     </footer>
   </div>
 </template>
-<script>
-  import LayoutController from './Layout.controller';
-  export default LayoutController;
-</script>
+<script src="./Layout.controller"></script>

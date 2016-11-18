@@ -6,7 +6,4 @@
     这里是代码广场。
   </div>
 </template>
-<script>
-  export default {
-  };
-</script>
+<script src="./Square.controller.js"></script>

@@ -1,42 +1,31 @@
-import Vue from 'vue';
-import VueResource from 'vue-resource';
-Vue.use(VueResource);
+import { layer } from './';
+import store from './../store';
 
-import { layer } from './layer';
-
-const HTTP_TIMEOUT = 1000 * 60; // 请求超时时间1分钟
-
-let _buildOptions = (method, options) => {
-  return options || {};
-};
-
-let _request = (method, url, data, options) => {
-  let reqestOptions = {
-    method: method,
-    body: data,
-    url: url
-  };
-  if (options.headers) {
-    reqestOptions.headers = options.headers;
-  }
-  if (options.params) {
-    reqestOptions.params = options.params;
-  }
+const request = (method, url, data, config = {}) => {
+  let options = Object.assign({}, config, {
+    url,
+    method,
+    data,
+    baseURL: AppConf.apiHost
+  });
+  options.headers = options.headers || {};
+  options.headers['x-sw-admin-token'] = store.state.token;
   return new Promise((resolve, reject) => {
-    Vue.http(reqestOptions)
+    axios.request(options)
       .then(res => {
-        return res.json();
-      })
-      .then(data => {
+        let data = res.data;
         if (data.hasError) {
-          layer.error(data.message);
-          return reject(data);
+          if (!res.config.notNotifyError) {
+            layer.error(data.message);
+            return reject(data);
+          }
         }
         resolve(data);
-      })
-      .catch(reason => {
-        console.log('ajax error', reason);
-        reject(reason);
+      }).catch(res => {
+        if (!res.config.notNotifyError) {
+          layer.error(res.message);
+        }
+        reject(res);
       });
   });
 };
@@ -47,31 +36,58 @@ export const ajax = {
    * @param url api地址
    * @param options 配置项
    */
-  get(url, options) {
-    return _request('get', url, null, _buildOptions('get', options));
+  get(url, config) {
+    return request('get', url, null, config);
   },
   /**
    * DELETE data
    * @param url api地址
    * @param options 配置项
    */
-  delete(url, options) {
-    return _request('delete', url, null, _buildOptions('delete', options));
+  delete(url, config) {
+    return request('delete', url, null, config);
+  },
+  /**
+   * HEAD
+   * @param url api地址
+   * @param options 配置项
+   */
+  head(url, config) {
+    return request('head', url, null, config);
   },
   /**
    * POST data
    * @param url api地址
+   * @param data 要提交的数据
    * @param options 配置项
    */
-  post(url, data, options) {
-    return _request('post', url, data, _buildOptions('post', options));
+  post(url, data, config) {
+    return request('post', url, data, config);
   },
   /**
    * PUT data
    * @param url api地址
+   * @param data 要提交的数据
    * @param options 配置项
    */
-  put: (url, data, options) => {
-    return _request('put', url, data, _buildOptions('put', options));
+  put(url, data, config) {
+    return request('put', url, data, config);
+  },
+  /**
+   * Patch data
+   * @param url api地址
+   * @param data 要提交的数据
+   * @param options 配置项
+   */
+  patch(url, data, config) {
+    return request('path', url, data, config);
+  },
+  /**
+   * Set Common Header
+   * @param key Header key
+   * @param value Header value
+   */
+  setCommonHeader(key, value) {
+    window.axios.defaults.headers.common[key] = value;
   }
 };

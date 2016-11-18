@@ -3,8 +3,4 @@
     <h1>404</h1>
   </div>
 </template>
-<script>
-  export default {
-    
-  };
-</script>
+<script src="./NotFound.controller.js"></script>
