@@ -1,4 +1,4 @@
-import { ajax, layer } from './../common';
+import { ajax, layer } from './../../common';
 
 export default {
   data() {

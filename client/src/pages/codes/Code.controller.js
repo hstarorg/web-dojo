@@ -1,8 +1,8 @@
 import { mapActions } from 'vuex';
 
-import { aceEditor, modal, console } from './../components';
-import { eventBus, ajax, layer } from './../common';
-import { codeTemplates } from './../services';
+import { aceEditor, modal, console } from './../../components';
+import { eventBus, ajax, layer } from './../../common';
+import { codeTemplates } from './../../services';
 
 export default {
   components: {

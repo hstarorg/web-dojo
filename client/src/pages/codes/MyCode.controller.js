@@ -1,4 +1,4 @@
-import { ajax } from './../common';
+import { ajax } from './../../common';
 import { mapActions } from 'vuex';
 export default {
   data() {

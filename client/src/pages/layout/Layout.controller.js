@@ -1,4 +1,4 @@
-import { eventBus, storage } from './../common';
+import { eventBus, storage } from './../../common';
 import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'layout',

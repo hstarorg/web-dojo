@@ -5,16 +5,16 @@ Vue.use(VueRouter);
 import { layer } from './common';
 import { auth } from './services';
 
-import Login from './pages/Login.vue';
-import Register from './pages/Register.vue';
+import Login from './pages/login/Login.vue';
+import Register from './pages/register/Register.vue';
 
-import Layout from './pages/Layout.vue';
-import MyCode from './pages/MyCode.vue';
-import Square from './pages/Square.vue';
-import Code from './pages/Code.vue';
-import NotFound from './pages/NotFound.vue';
+import Layout from './pages/layout/Layout.vue';
+import MyCode from './pages/codes/MyCode.vue';
+import Square from './pages/codes/Square.vue';
+import Code from './pages/codes/Code.vue';
+import NotFound from './pages/error/NotFound.vue';
 import RedirectToCode from './pages/RedirectToCode.vue';
-import MyGist from './pages/MyGist.vue';
+import MyGist from './pages/gists/MyGist.vue';
 
 const routes = [
   { path: '/login', component: Login },
