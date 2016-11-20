@@ -28,6 +28,7 @@
     "vuex": "^2.0.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.39",
     "autoprefixer": "^6.5.3",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",

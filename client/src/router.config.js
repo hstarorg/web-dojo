@@ -32,14 +32,14 @@ const routes = [
     children: [
       { path: '', component: Code },
       { path: 'new', component: RedirectToCode },
-      { path: 'mycode', component: MyCode },
+      { path: 'mycodes', component: MyCode },
       { path: 'square', component: Square },
-      { path: 'mygist', component: MyGist },
+      { path: 'mygists', component: MyGist },
       { path: 'newgist', component: AddGist },
       { path: ':id([a-z0-9]{12})', component: Code }
     ]
   },
-  { path: '*', component: NotFound }
+  { path: '*', redirect: '/', component: NotFound }
 ];
 
 const router = new VueRouter({

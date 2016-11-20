@@ -33,10 +33,10 @@
                 <a class="nav-link" href="javascript:void(0);" @click.stop.prevent="forkCode($event)">Fork</a>
               </li>-->
               <li class="nav-item">
-                <router-link to="/mycode">MyCode</router-link>
+                <router-link to="/mycodes">MyCodes</router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/mygist">MyGist</router-link>
+                <router-link to="/mygists">MyGists</router-link>
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
