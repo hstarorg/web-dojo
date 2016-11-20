@@ -1,8 +1,8 @@
-let gulp = require('gulp');
-let del = require('del');
-let devServer = require('gulp-develop-server');
+const gulp = require('gulp4');
+const del = require('del');
+const devServer = require('gulp-develop-server');
 
-let isRelease = process.argv.indexOf('-r') > 0;
+const isRelease = process.argv.indexOf('-r') > 0;
 
 gulp.task('clean', done => {
   del(['./dist']).then(() => done());
