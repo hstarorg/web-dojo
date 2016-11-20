@@ -35,6 +35,7 @@ export default {
     },
     clearSearch(){
       this.searchKeyword = '';
+      this.curPage = 1;
       this.fetchCodes();
     }
   }

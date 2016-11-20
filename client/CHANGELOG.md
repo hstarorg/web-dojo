@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.3.1 (2016-11-21)
+
+- 修复当分页页数较大时，搜索结果不能直接显示的bug（必须手动点击分页到第一页）
+
 ## 0.3.0 (2016-11-21)
 
 - 升级依赖到最新版本
