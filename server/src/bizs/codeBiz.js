@@ -55,7 +55,18 @@ const getMyCodes = (req, res, next) => {
   let userId = req.reqObj.userId;
   let pageIndex = +req.query.pageIndex || 1;
   let pageSize = +req.query.pageSize || 20;
-  db.queryPaginationData(Code, { userId }, { pageIndex, pageSize }, { lastUpdated: -1 })
+  let search = req.query.search;
+  let filter = { userId };
+  if (search) {
+    let searchReg = new RegExp(search, 'ig');
+    filter.$or = [
+      { codeName: searchReg },
+      { codeDescription: searchReg },
+      { codeTags: search }
+    ]
+  }
+  console.log(filter);
+  db.queryPaginationData(Code, filter, { pageIndex, pageSize }, { lastUpdated: -1 })
     .then(data => {
       res.send(data);
     }).catch(reason => next(reason));

@@ -16,6 +16,8 @@ const codeSchema = new Schema({
   isPrivate: Boolean, //是否私有
 });
 
+codeSchema.index({ codeName: 'text', codeDescription: 'text' });
+
 const Code = db.model('Code', codeSchema);
 
 module.exports = Code;

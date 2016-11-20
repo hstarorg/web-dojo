@@ -17,6 +17,8 @@ const gistSchema = new Schema({
   isPrivate: Boolean, //是否私有
 });
 
+gistSchema.index({ gistName: 'text', gistDescription: 'text' });
+
 const Gist = db.model('Gist', gistSchema);
 
 module.exports = Gist;

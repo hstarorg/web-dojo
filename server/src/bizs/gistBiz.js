@@ -35,7 +35,17 @@ const getGists = (req, res, next) => {
   let userId = req.reqObj.userId;
   let pageIndex = +req.query.pageIndex || 1;
   let pageSize = +req.query.pageSize || 20;
-  db.queryPaginationData(Gist, { userId }, { pageIndex, pageSize })
+  let search = req.query.search;
+  let filter = { userId };
+  if (search) {
+    let searchReg = new RegExp(search, 'ig');
+    filter.$or = [
+      // { $text: { $search: search } }, 文本检索，会按照空格分词
+      { gistName: searchReg },
+      { gistDescription: searchReg }
+    ];
+  }
+  db.queryPaginationData(Gist, filter, { pageIndex, pageSize })
     .then(data => {
       res.send(data);
     }).catch(reason => next(reason));
