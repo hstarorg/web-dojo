@@ -1,5 +1,6 @@
 <style lang="stylus" scoped>
 	.page-code {
+		background: #fff;
 		position: fixed;
 		top: 50px;
 		left: 0;

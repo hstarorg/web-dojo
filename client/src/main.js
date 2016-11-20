@@ -1,4 +1,4 @@
-import './css/main.css';
+import './styl/all.styl';
 
 import Vue from 'vue';
 

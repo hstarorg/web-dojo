@@ -1,12 +1,4 @@
 <style lang="stylus">
-  body {
-    background: url(http://img06.tooopen.com/images/20160709/tooopen_sy_169817635294.jpg);
-    background-size: cover;
-  }
-  .container{
-    background: #fff;
-  }
-  
   .page-add-gist {
     .code-container {
       padding-top: 10px;
