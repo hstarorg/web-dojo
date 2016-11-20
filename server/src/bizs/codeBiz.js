@@ -1,6 +1,7 @@
 const Code = require('./../models/Code');
 const BusError = require('./../models/BusError');
 const util = require('./../common/util');
+const db = require('./../common/db');
 
 const createCode = (req, res, next) => {
   let body = req.body;
@@ -50,8 +51,19 @@ const getCode = (req, res, next) => {
   });
 };
 
+const getMyCodes = (req, res, next) => {
+  let userId = req.reqObj.userId;
+  let pageIndex = +req.query.pageIndex || 1;
+  let pageSize = +req.query.pageSize || 20;
+  db.queryPaginationData(Code, { userId }, { pageIndex, pageSize }, { lastUpdated: -1 })
+    .then(data => {
+      res.send(data);
+    }).catch(reason => next(reason));
+};
+
 module.exports = {
   createCode,
   updateCode,
-  getCode
+  getCode,
+  getMyCodes
 };

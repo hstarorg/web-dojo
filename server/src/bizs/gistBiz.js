@@ -33,7 +33,9 @@ const getGist = (req, res, next) => {
 
 const getGists = (req, res, next) => {
   let userId = req.reqObj.userId;
-  db.queryPaginationData(Gist, { userId }, { pageIndex: 1, pageSize: 20 })
+  let pageIndex = +req.query.pageIndex || 1;
+  let pageSize = +req.query.pageSize || 20;
+  db.queryPaginationData(Gist, { userId }, { pageIndex, pageSize })
     .then(data => {
       res.send(data);
     }).catch(reason => next(reason));

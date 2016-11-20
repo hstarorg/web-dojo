@@ -11,9 +11,13 @@ mongoose.set('debug', true);
 
 mongoose.Promise = global.Promise;
 
-mongoose.queryPaginationData = (Model, filter = {}, {pageIndex = 1, pageSize = 20}) => {
+mongoose.queryPaginationData = (Model, filter = {}, {pageIndex = 1, pageSize = 20}, sortOpt) => {
   let skip = (pageIndex - 1) * pageSize;
-  let dataPromise = Model.find(filter).skip(skip).limit(pageSize).exec();
+  let dataQuery = Model.find(filter);
+  if (sortOpt) {
+    dataQuery = dataQuery.sort(sortOpt);
+  }
+  let dataPromise = dataQuery.skip(skip).limit(pageSize).exec();
   let countPromise = Model.count(filter);
   return Promise.all([dataPromise, countPromise])
     .then(results => {

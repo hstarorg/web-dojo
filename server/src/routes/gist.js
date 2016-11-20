@@ -4,7 +4,7 @@ let authBiz = require('./../bizs/authBiz');
 
 router.post('/', authBiz.validateUser, gistBiz.createGist);
 
-router.get('/gists', authBiz.validateUser, gistBiz.getGists);
+router.get('/mygists', authBiz.validateUser, gistBiz.getGists);
 
 router.get('/:gistId', gistBiz.getGist);
 
