@@ -32,6 +32,10 @@ export default {
     },
     goCreate() {
       this.$router.push('/newgist');
+    },
+    clearSearch(){
+      this.searchKeyword = '';
+      this.fetchCodes();
     }
   }
 };

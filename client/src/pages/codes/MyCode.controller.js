@@ -25,6 +25,10 @@ export default {
           this.codes = result.data;
           this.totalCount = result.totalCount;
         });
+    },
+    clearSearch(){
+      this.searchKeyword = '';
+      this.fetchCodes();
     }
   }
 };
