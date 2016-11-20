@@ -1,8 +1,7 @@
-let db = require('./../common/db');
+const db = require('./../common/db');
+const Schema = db.Schema;
 
-let Schema = db.Schema;
-
-let userSchema = new Schema({
+const userSchema = new Schema({
   username: String, // 用户名
   password: String, // 密码
   registerDate: { type: Date, default: Date.now }, // 注册时间
@@ -33,6 +32,6 @@ userSchema.virtual('name.full').get(function () {
   return this.name.first + ' ' + this.name.last;
 });
 
-let User = db.model('User', userSchema);
+const User = db.model('User', userSchema);
 
 module.exports = User;

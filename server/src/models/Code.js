@@ -1,8 +1,7 @@
-let db = require('./../common/db');
+const db = require('./../common/db');
+const Schema = db.Schema;
 
-let Schema = db.Schema;
-
-let codeSchema = new Schema({
+const codeSchema = new Schema({
   userId: String, //所有者，
   codeId: String, //项目ID
   versionNo: Number, //项目版本
@@ -17,6 +16,6 @@ let codeSchema = new Schema({
   isPrivate: Boolean, //是否私有
 });
 
-let Code = db.model('Code', codeSchema);
+const Code = db.model('Code', codeSchema);
 
 module.exports = Code;
