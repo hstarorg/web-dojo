@@ -18,6 +18,11 @@ export default {
   created() {
     this.fetchCodes();
   },
+  watch: {
+    curPage(newVal){
+      this.fetchCodes();
+    }
+  },
   methods: {
     fetchCodes() {
       ajax.get(`${AppConf.apiHost}/code/mycodes`, { params: { pageIndex: this.curPage, pageSize: this.pageSize, search: this.searchKeyword } })

@@ -1,13 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 0.2.2 (2016-11-x)
+## 0.3.0 (2016-11-21)
 
 - 升级依赖到最新版本
 - 将ajax库替换为 ``axios`` (原本是 ``vue-resource``)
 - 优化自动逻辑逻辑
 - 增加 ``GIST`` 功能（类似 ``github gist``）
 - 调整 ``pages`` 目录结构
+- 增加分页功能
+- 增加搜索功能
 
 ## 0.2.1 (2016-11-3)
 
