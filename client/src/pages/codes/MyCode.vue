@@ -22,7 +22,7 @@
             <input type="text" class="form-control" placeholder="Name | Description | Tags" v-model="searchKeyword">
             <span class="input-group-btn">
               <button class="btn btn-info" @click="clearSearch()"><i class="fa fa-close"></i></button>
-              <button class="btn btn-primary" @click="fetchCodes()"><i class="fa fa-search"></i> Search</button>
+              <button class="btn btn-primary" @click="fetchCodes(true)"><i class="fa fa-search"></i> Search</button>
             </span>
           </div>
         </div>

@@ -24,7 +24,10 @@ export default {
     }
   },
   methods: {
-    fetchCodes() {
+    fetchCodes(isSearch) {
+      if(isSearch){
+        this.curPage = 1;
+      }
       ajax.get(`${AppConf.apiHost}/code/mycodes`, { params: { pageIndex: this.curPage, pageSize: this.pageSize, search: this.searchKeyword } })
         .then(result => {
           this.codes = result.data;
