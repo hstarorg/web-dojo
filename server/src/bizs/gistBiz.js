@@ -1,6 +1,7 @@
 const Gist = require('./../models/Gist');
 const BusError = require('./../models/BusError');
 const util = require('./../common/util');
+const db = require('./../common/db');
 
 const createGist = (req, res, next) => {
   let body = req.body;
@@ -32,10 +33,10 @@ const getGist = (req, res, next) => {
 
 const getGists = (req, res, next) => {
   let userId = req.reqObj.userId;
-  Gist.find({ userId }, (err, gists) => {
-    if (err) return next(err);
-    res.send(gists);
-  });
+  db.queryPaginationData(Gist, { userId }, { pageIndex: 1, pageSize: 20 })
+    .then(data => {
+      res.send(data);
+    }).catch(reason => next(reason));
 };
 
 module.exports = {
