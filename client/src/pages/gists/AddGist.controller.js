@@ -27,6 +27,9 @@ export default {
         body.scrollTop = body.scrollHeight;
       });
     },
+    goMyGists(){
+      this.$router.push('/mygists');
+    },
     removeFile(idx) {
       this.codeFiles.splice(idx, 1);
     },

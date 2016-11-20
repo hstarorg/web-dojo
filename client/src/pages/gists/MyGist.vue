@@ -16,9 +16,9 @@
       <div class="row">
         <div class="col-md-6">
           <div class="input-group input-group-sm">
-            <input type="text" class="form-control" placeholder="Gist name|description">
+            <input type="text" class="form-control" placeholder="Gist name|description" v-model="searchKeyword">
             <span class="input-group-btn">
-              <button class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+              <button class="btn btn-primary" @click="fetchCodes()"><i class="fa fa-search"></i> Search</button>
             </span>
           </div>
         </div>

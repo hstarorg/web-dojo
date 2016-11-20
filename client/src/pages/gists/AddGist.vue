@@ -23,7 +23,9 @@
 </style>
 <template>
   <div class="page-add-gist container">
-    <h3>Add Gist</h3>
+    <h3>Add Gist
+      <button class="btn btn-xs btn-info pull-right" @click="goMyGists()">Return My Gist List</button>
+    </h3>
     <hr>
     <form>
       <div class="form-group">

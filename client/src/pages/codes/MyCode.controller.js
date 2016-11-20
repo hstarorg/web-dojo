@@ -11,7 +11,8 @@ export default {
       codes: [],
       totalCount: 1,
       pageSize: 20,
-      curPage: 1
+      curPage: 1,
+      searchKeyword: ''
     };
   },
   created() {
@@ -19,7 +20,7 @@ export default {
   },
   methods: {
     fetchCodes() {
-      ajax.get(`${AppConf.apiHost}/code/mycodes`, { params: { pageIndex: this.curPage, pageSize: this.pageSize } })
+      ajax.get(`${AppConf.apiHost}/code/mycodes`, { params: { pageIndex: this.curPage, pageSize: this.pageSize, search: this.searchKeyword } })
         .then(result => {
           this.codes = result.data;
           this.totalCount = result.totalCount;

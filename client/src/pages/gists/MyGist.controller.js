@@ -10,7 +10,8 @@ export default {
       gists: [],
       curPage: 1,
       pageSize: 20,
-      totalCount: 21
+      totalCount: 21,
+      searchKeyword: ''
     };
   },
   created() {
@@ -23,7 +24,7 @@ export default {
   },
   methods: {
     fetchCodes() {
-      ajax.get(`${AppConf.apiHost}/gist/mygists`, { params: { pageIndex: this.curPage, pageSize: this.pageSize } })
+      ajax.get(`${AppConf.apiHost}/gist/mygists`, { params: { pageIndex: this.curPage, pageSize: this.pageSize, search: this.searchKeyword } })
         .then(data => {
           this.gists = data.data;
           this.totalCount = data.totalCount;
