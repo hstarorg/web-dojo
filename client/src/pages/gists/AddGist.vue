@@ -64,6 +64,7 @@
         <ace-editor v-model="codeFile.code" :mode="codeFile.mode" :theme="codeFile.editorTheme" :height="300"></ace-editor>
       </div>
     </form>
+    <br>
     <div class="code-operate-container">
       <button class="btn btn-info btn-block" @click.prevent="addFile()">Add File</button>
       <button class="btn btn-primary btn-block" @click.prevent="saveGist()">Save Gist</button>

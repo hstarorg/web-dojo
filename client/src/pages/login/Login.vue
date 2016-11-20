@@ -1,10 +1,4 @@
-<style>
-  #web-dojo-app,
-  body,
-  html {
-    height: 100%;
-  }
-  
+<style lang="stylus"> 
   .page-login {
     background-color: #1abc9c;
     background-image: radial-gradient(circle farthest-side at center top, #55e7ca 0%, #1abc9c 100%);
@@ -17,6 +11,9 @@
     background-size: cover;
     position: relative;
     box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3);
+    .container{
+      background: initial;
+    }
   }
   .remember-box{
     float: left;
