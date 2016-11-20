@@ -1,5 +1,5 @@
 <template>
-  <div class="ace-editor">
+  <div class="ace-editor" :style="{height: this.height + 'px'}">
     <pre :id="editorId" :style="{height: this.height + 'px'}"></pre>
   </div>
 </template>

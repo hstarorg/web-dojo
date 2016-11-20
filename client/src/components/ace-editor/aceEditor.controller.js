@@ -48,6 +48,10 @@ export default {
     height: {
       type: Number,
       default: 100
+    },
+    readonly: {
+      type: Boolean,
+      default: false
     }
   }, //['value', 'mode', 'theme', 'height'],
   data() {
@@ -70,6 +74,7 @@ export default {
       editor.setOption('tabSize', 2);
       editor.setOption('enableSnippets', true);
       editor.setOption('showPrintMargin', false);
+      editor.setReadOnly(this.readonly);
       editor.setValue(this.value, 1);
       let self = this;
       editor.commands.addCommand({
@@ -132,6 +137,9 @@ export default {
     },
     theme(newVal, oldVal) {
       this.editor.setTheme(`ace/theme/${newVal}`);
+    },
+    readonly(newVal) {
+      this.editor.setReadOnly(newVal);
     }
   }
 };

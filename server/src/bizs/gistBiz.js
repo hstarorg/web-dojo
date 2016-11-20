@@ -32,7 +32,7 @@ const getGist = (req, res, next) => {
 
 const getGists = (req, res, next) => {
   let userId = req.reqObj.userId;
-  Gist.findOne({ userId }, (err, gists) => {
+  Gist.find({ userId }, (err, gists) => {
     if (err) return next(err);
     res.send(gists);
   });

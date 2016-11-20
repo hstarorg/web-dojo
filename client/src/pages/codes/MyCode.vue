@@ -1,6 +1,7 @@
 <style>
   .page-mycode{
     margin-top: 5px;
+    padding-top: 5px;
   }
   .page-mycode .label-info{
     margin-right: 5px;
