@@ -9,6 +9,7 @@ export default {
     return {
       gists: [],
       curPage: 1,
+      pageSize: 20,
       totalCount: 21
     };
   },
@@ -22,9 +23,10 @@ export default {
   },
   methods: {
     fetchCodes() {
-      ajax.get(`${AppConf.apiHost}/gist/gists`)
-        .then(gists => {
-          this.gists = gists;
+      ajax.get(`${AppConf.apiHost}/gist/mygists`, { params: { pageIndex: this.curPage, pageSize: this.pageSize } })
+        .then(data => {
+          this.gists = data.data;
+          this.totalCount = data.totalCount;
         });
     },
     goCreate() {

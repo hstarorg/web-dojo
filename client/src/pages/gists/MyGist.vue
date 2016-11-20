@@ -1,11 +1,12 @@
 <style lang="stylus">
   .page-my-gist {
     padding-top: 5px;
-    hr{
-      margin: 10px 0; 
+    hr {
+      margin: 10px 0;
     }
-    .pagination-container{
+    .pagination-container {
       text-align: right;
+      height: 30px;
     }
   }
 </style>
@@ -22,7 +23,7 @@
           </div>
         </div>
         <div class="col-md-6 pagination-container">
-          <pagination v-model="curPage" :total-count="totalCount"></pagination>
+          <pagination v-model="curPage" :page-size="pageSize" :total-count="totalCount"></pagination>
         </div>
       </div>
     </div>

@@ -1,14 +1,36 @@
-<style>
-  .page-mycode{
-    margin-top: 5px;
+<style lang="stylus">
+  .page-mycode {
     padding-top: 5px;
-  }
-  .page-mycode .label-info{
-    margin-right: 5px;
+    hr {
+      margin: 10px 0;
+    }
+    .label-info {
+      margin-right: 5px;
+    }
+    .pagination-container {
+      text-align: right;
+      height: 30px;
+    }
   }
 </style>
 <template>
   <div class="page-mycode container">
+    <div class="search-box">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group input-group-sm">
+            <input type="text" class="form-control" placeholder="Name | Description | Tags">
+            <span class="input-group-btn">
+              <button class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-6 pagination-container">
+          <pagination v-model="curPage" :page-size="pageSize" :total-count="totalCount"></pagination>
+        </div>
+      </div>
+    </div>
+    <hr>
     <table class="table table-bordered table-condensed table-striped">
       <thead>
         <tr>
