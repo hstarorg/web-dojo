@@ -1,13 +1,24 @@
 import { ajax } from './../../common';
+import { pagination } from './../../components';
 
 export default {
+  components: {
+    pagination
+  },
   data() {
     return {
-      gists: []
+      gists: [],
+      curPage: 1,
+      totalCount: 21
     };
   },
-  created(){
+  created() {
     this.fetchCodes();
+  },
+  watch: {
+    curPage(newVal) {
+      this.fetchCodes();
+    }
   },
   methods: {
     fetchCodes() {
@@ -16,7 +27,7 @@ export default {
           this.gists = gists;
         });
     },
-    goCreate(){
+    goCreate() {
       this.$router.push('/newgist');
     }
   }

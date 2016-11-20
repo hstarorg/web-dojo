@@ -1,11 +1,32 @@
 <style lang="stylus">
   .page-my-gist {
-    margin-top: 5px;
     padding-top: 5px;
+    hr{
+      margin: 10px 0; 
+    }
+    .pagination-container{
+      text-align: right;
+    }
   }
 </style>
 <template>
   <div class="page-my-gist container">
+    <div class="search-box">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group input-group-sm">
+            <input type="text" class="form-control" placeholder="Gist name|description">
+            <span class="input-group-btn">
+              <button class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-6 pagination-container">
+          <pagination v-model="curPage" :total-count="totalCount"></pagination>
+        </div>
+      </div>
+    </div>
+    <hr>
     <table class="table table-bordered table-condensed table-striped">
       <thead>
         <tr>
@@ -23,7 +44,6 @@
             {{ item.gistDescription }}
           </td>
           <td>
-
           </td>
         </tr>
       </tbody>
