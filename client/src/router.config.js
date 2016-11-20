@@ -15,6 +15,7 @@ import Code from './pages/codes/Code.vue';
 import NotFound from './pages/error/NotFound.vue';
 import RedirectToCode from './pages/RedirectToCode.vue';
 import MyGist from './pages/gists/MyGist.vue';
+import AddGist from './pages/gists/AddGist.vue';
 
 const routes = [
   { path: '/login', component: Login },
@@ -34,6 +35,7 @@ const routes = [
       { path: 'mycode', component: MyCode },
       { path: 'square', component: Square },
       { path: 'mygist', component: MyGist },
+      { path: 'newgist', component: AddGist },
       { path: ':id([a-z0-9]{12})', component: Code }
     ]
   },
