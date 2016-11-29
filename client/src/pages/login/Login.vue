@@ -12,7 +12,7 @@
     position: relative;
     box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3);
     .container{
-      background: initial;
+      background: inherit;
     }
   }
   .remember-box{
@@ -55,13 +55,13 @@
         </div>
         <div class="login-form-links link1 animated fadeInLeftBig" data-animation="fadeInLeftBig" data-animation-delay=".2s" style="animation-delay: 0.2s;">
           <h4 class="blue">Don't have an Account?</h4>
-          <span>No worry</span>
+          <span>No worry,</span>
           <router-link to="/register" class="blue">Click Here</router-link>
-          <span>to Register</span>
+          <span>to create acount.</span>
         </div>
         <div class="login-form-links link2 animated fadeInRightBig" data-animation="fadeInRightBig" data-animation-delay=".4s" style="animation-delay: 0.4s;">
           <h4 class="green">Forget your Password?</h4>
-          <span>Dont worry</span>
+          <span>Dont worry,</span>
           <a href="javascript:void(0)" class="green">Click Here</a>
           <span>to Get New One</span>
         </div>

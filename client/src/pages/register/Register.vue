@@ -1,4 +1,4 @@
-<style>
+<style lang="stylus">
   #web-dojo-app,
   body,
   html {
@@ -17,6 +17,9 @@
     background-size: cover;
     position: relative;
     box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3);
+    .container{
+      background: inherit;
+    }
   }
 </style>
 <template>

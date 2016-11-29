@@ -1,13 +1,14 @@
 (function (window) {
-  let originalConsole = window.console;
-  let console = {};
-  Object.keys(window.console).forEach(key => {
+  var originalConsole = window.console;
+  var console = {};
+  Object.keys(window.console).forEach(function (key) {
     console[key] = function () {
+      let args = [].slice.call(arguments, 0);
       window.parent.postMessage({
         funName: key,
-        data: [...arguments]
+        data: args
       }, '*');
-      originalConsole[key].call(this, ...arguments);
+      originalConsole[key].apply(this, args);
     };
   });
 
