@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.4.0 (2016-11-29)
+
+- 修复自动失败登录时，无法跳转到登录页面的bug
+- 增加对IE10、11的兼容
+
 ## 0.3.1 (2016-11-21)
 
 - 修复当分页页数较大时，搜索结果不能直接显示的bug（必须手动点击分页到第一页）
