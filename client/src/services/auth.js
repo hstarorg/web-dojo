@@ -30,6 +30,8 @@ export const auth = {
       .then(data => {
         this._processLoginData(data, true);
         return true;
+      }).catch(() => {
+        return Promise.resolve(false);
       });
   },
 
