@@ -10,7 +10,10 @@ import App from './App.vue';
 import router from './router.config';
 import store from './store';
 
-let app = new Vue({
+// 导入I18N
+import './i18n';
+
+const app = new Vue({
   el: '#web-dojo-app',
   router,
   store,

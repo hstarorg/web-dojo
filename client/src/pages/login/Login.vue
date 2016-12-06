@@ -1,4 +1,4 @@
-<style lang="stylus"> 
+<style lang="stylus">
   .page-login {
     background-color: #1abc9c;
     background-image: radial-gradient(circle farthest-side at center top, #55e7ca 0%, #1abc9c 100%);
@@ -11,11 +11,12 @@
     background-size: cover;
     position: relative;
     box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3);
-    .container{
+    .container {
       background: transparent;
     }
   }
-  .remember-box{
+  
+  .remember-box {
     float: left;
     width: auto !important;
     margin-top: 2.5px !important;
@@ -28,7 +29,7 @@
         <div class="login-content animated bounceIn" data-animation="bounceIn">
           <form @submit.prevent="login()">
             <div class="section-title">
-              <h3>Web Dojo Log In</h3>
+              <h3>{{$t('login.title')}}</h3>
             </div>
             <div class="textbox-wrap">
               <div class="input-group">
