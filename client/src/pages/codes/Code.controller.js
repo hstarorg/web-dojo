@@ -21,6 +21,7 @@ export default {
       templates: [],
       previewLoading: false, // 预览正在加载中
       startLoadingTime: 0, // 开始加载时间
+      currentTempalteName: '',
       moveObj: {
         startX: 0,
         isMoving: false
@@ -42,7 +43,7 @@ export default {
     let self = this;
     window.addEventListener('resize', this.setEditorHeight);
     this.templates = Object.keys(codeTemplates).map(x => {
-      return { name: x, text: `${x[0].toUpperCase()}${x.substring(1)}` };
+      return { name: x, text: codeTemplates[x].text };
     });
     this.fetchCode();
     window.addEventListener('message', function (evt) {
@@ -87,6 +88,7 @@ export default {
     },
     changeTemplate(templateName) {
       let template = codeTemplates[templateName];
+      this.currentTempalteName = template.text;
       this.jsCode = template.javascript;
       this.htmlCode = template.html;
       this.cssCode = template.css;
@@ -189,7 +191,7 @@ export default {
             this.$router.push('/');
           });
       } else {
-        this.changeTemplate('normal');
+        this.changeTemplate('html');
       }
     },
 

@@ -1,5 +1,23 @@
 export const codeTemplates = {
+  html: {
+    text: 'HTML',
+    javascript: ``,
+    html: `<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Web Dojo Code</title>
+  </head>
+  <body>
+    <div>
+      <h1>Hello Dojo</h1>
+    </div>
+  </body>
+</html>`,
+    css: ``
+  },
   vue: {
+    text: 'Vue',
     javascript: `new Vue({
   el: '#app',
   data: {
@@ -24,6 +42,7 @@ export const codeTemplates = {
     css: ``
   },
   vue2: {
+    text: 'Vue2',
     javascript: `new Vue({
   el: '#app',
   data: {
@@ -48,6 +67,7 @@ export const codeTemplates = {
     css: ``
   },
   jquery: {
+    text: 'jQuery',
     javascript: `$(function() {
   //do something
 });`,
@@ -66,23 +86,8 @@ export const codeTemplates = {
 </html>`,
     css: ''
   },
-  normal: {
-    javascript: ``,
-    html: `<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Web Dojo Code</title>
-  </head>
-  <body>
-    <div>
-      <h1>Hello Dojo</h1>
-    </div>
-  </body>
-</html>`,
-    css: ``
-  },
   angular: {
+    text: 'Angular',
     javascript: `angular.module('app', [])
 .controller('DefaultController', ['$scope', function($scope){
   $scope.message = 'Hello Angular!';

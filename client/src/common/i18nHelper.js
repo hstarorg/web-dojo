@@ -6,6 +6,7 @@ const locals = {};
 export const I18nHelper = {
   init() {
     Vue.use(VueI18n);
+    Vue.config.fallbackLang = 'en';
   },
 
   setLang(lang) {
@@ -20,9 +21,12 @@ export const I18nHelper = {
   },
 
   loadLocal() {
-    console.log(locals);
     Object.keys(locals).forEach(lang => {
       Vue.locale(lang, locals[lang]);
     });
+  },
+
+  getValue(keypath, lang, args) {
+    return Vue.t(keypath, lang, args);
   }
 };

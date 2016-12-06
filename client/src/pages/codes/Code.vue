@@ -8,29 +8,47 @@
 		bottom: 0;
 		/*z-index: 1030;*/
 		.code-tool-bar {
-			height: 40px;
+			height: 42px;
 			border-bottom: 1px solid lightgray;
 			padding-top: 5px;
 			.preview-loading {
 				line-height: 30px;
 			}
-      .btn-run-icon{
-        float: right;
-        font-size: 1.5em;
-        margin-left: 5px;
-      }
+			.btn-run-icon {
+				float: right;
+				font-size: 1.5em;
+				margin-left: 5px;
+			}
 		}
 		.code-editor-container {
 			position: absolute;
-			top: 40px;
+			top: 0;
 			left: 0;
 			right: 0;
 			bottom: 0;
 		}
 		.editor-container {
-			width: calc(50% - 5px);
+			width: calc(50%);
 			float: left;
 			height: 100%;
+			.template-select-parent {
+				padding: 4px 5px 4px 0;
+			}
+			.template-select {
+				button {
+					background: transparent;
+					outline: none;
+					&.dropdown-toggle{
+						padding-right: 5px;
+					}
+					&.btn-label{
+						padding-left: 5px;
+					}
+				}
+			}
+			li.active button {
+				color: #fff;
+			}
 		}
 		.container-slider {
 			position: absolute;
@@ -48,42 +66,37 @@
 				background: green;
 			}
 		}
-		.preview-container {
+		.right-container {
 			width: 50%;
 			float: right;
 			height: 100%;
-			overflow-y: hidden;
+			.preview-container {
+				width: 100%;
+				height: 100%;
+				overflow-y: hidden;
+			}
 		}
-		.run-code {}
 	}
 </style>
 <template>
 	<div class="page-code">
-		<div class="code-tool-bar">
-			<div class="row">
-				<div class="col-md-6">
-					<div class="btn-group btn-group-sm">
-						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-              Select template
-              <span class="caret"></span>
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-						<ul class="dropdown-menu" role="menu">
-							<li v-for="item in templates" @click="changeTemplate(item.name)"><a href="#">{{ item.text }}</a></li>
-						</ul>
-					</div>
-					<button class="btn btn-sm btn-success pull-right" @click.prevent="runCode()">Run Code <i class="fa fa-caret-right btn-run-icon"></i></button>
-				</div>
-				<div class="col-md-6">
-					<span class="text-danger preview-loading" v-show="previewLoading">Preview is loading...</span>
-					<button class="btn btn-sm btn-warning pull-right" :class="{'btn-danger': logConsole.unreadCount > 0}" @click="toggleConsole()">Console <span v-show="logConsole.unreadCount > 0 ">({{ logConsole.unreadCount }})</span></button>
-				</div>
-			</div>
-		</div>
 		<div class="code-editor-container">
 			<div class="editor-container">
 				<ul class="nav nav-tabs nav-pills" role="tablist">
-					<li role="presentation" class="active"><a href="#htmlcode" role="tab" data-toggle="tab">HTML</a></li>
+					<li role="presentation" class="active">
+						<a href="#htmlcode" class="template-select-parent" role="tab" data-toggle="tab">
+							<div class="btn-group btn-group-sm template-select">
+								<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+									<span class="caret"></span>
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<button type="button" class="btn btn-label">	{{currentTempalteName}}</button>
+								<ul class="dropdown-menu" role="menu">
+									<li v-for="item in templates" @click="changeTemplate(item.name)"><a href="javascript:void(0)">{{ item.text }}</a></li>
+								</ul>
+							</div>
+						</a>
+					</li>
 					<li role="presentation"><a href="#jscode" role="tab" data-toggle="tab">JavaScript</a></li>
 					<li role="presentation"><a href="#csscode" role="tab" data-toggle="tab">CSS</a></li>
 				</ul>
@@ -105,10 +118,22 @@
 			<div class="container-slider">
 				<div></div>
 			</div>
-			<div class="preview-container">
-				<!--<iframe src="http://developer.newegg.org" frameborder="0" style="width: 100%;height: 100%;" border="0" marginwidth="0" marginheight="0"
+			<div class="right-container">
+				<div class="code-tool-bar">
+					<div class="row">
+						<div class="col-md-12">
+							<button class="btn btn-sm btn-success" @click.prevent="runCode()">Run Code <i class="fa fa-caret-right btn-run-icon"></i></button>
+							<span class="text-danger preview-loading" v-show="previewLoading">Preview is loading...</span>
+							<button class="btn btn-sm btn-warning pull-right" :class="{'btn-danger': logConsole.unreadCount > 0}" @click="toggleConsole()">Console <span v-show="logConsole.unreadCount > 0 ">({{ logConsole.unreadCount }})</span></button>
+						</div>
+					</div>
+				</div>
+				<div class="preview-container">
+					<!--<iframe src="http://developer.newegg.org" frameborder="0" style="width: 100%;height: 100%;" border="0" marginwidth="0" marginheight="0"
           scrolling="yes" allowtransparency="yes"></iframe>-->
+				</div>
 			</div>
+
 		</div>
 		<console v-model="logConsole"></console>
 		<modal :title="'Save Code'" v-model="showsaveDialog" effect="zoom" width="400" :backdrop="false">
