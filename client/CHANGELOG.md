@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 ## 0.5.0 (2016-12-06)
 
 - 增加多语言支持，支持 "en", "zh-cn" 切换
+- 优化UI，取消顶部工具栏
+- 选择模板位置变更，和HTML合并在一起
 
 ## 0.4.0 (2016-11-29)
 
