@@ -101,17 +101,16 @@ export default {
         return;
       }
       let changedWidth = e.pageX - this.moveObj.startX;
-      this.$el.querySelector('.editor-container').style.width = `calc(50% + ${changedWidth - 5}px)`;
+      this.$el.querySelector('.left-container').style.width = `calc(50% + ${changedWidth - 5}px)`;
       this.$el.querySelector('.container-slider').style.left = `calc(50% + ${changedWidth - 5}px)`;
       this.$el.querySelector('.preview-container').style.width = `calc(50% - ${changedWidth}px)`;
-      console.log(e.pageX - this.moveObj.startX);
     },
     onMouseUp(e) {
       this.moveObj.isMoving = false;
     },
 
     setEditorHeight() {
-      this.editorHeight = this.$el.querySelector('.editor-container').offsetHeight - 42;
+      this.editorHeight = this.$el.querySelector('.left-container').offsetHeight - 42;
     },
 
     _buildHtmlCodeForPreview() {

@@ -4,7 +4,7 @@
 		width: 600px;
 		height: 400px;
 		border: 1px solid #a3a3a3;
-		background: rgba(255, 255, 255, .5);
+		background: rgba(0, 0, 0, .5);
 		z-index: 100;
 		top: 100px;
 		right: 20px;
@@ -40,6 +40,7 @@
 				padding: 5px;
 				li {
 					list-style: none;
+					color: yellow;
 				}
 			}
 		}

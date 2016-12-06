@@ -1,8 +1,3 @@
-<style>
-  .page-content {
-    padding-top: 50px;
-  }
-</style>
 <template>
   <div class="warpper">
     <header>

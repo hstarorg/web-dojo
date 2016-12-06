@@ -15,8 +15,14 @@ export default {
         pageY: 0,
         top: 0,
         left: 0
-      }
+      },
+      events: []
     };
+  },
+  beforeDestroy() {
+    this.events.forEach(evt => {
+      evt.target.off(evt.name, evt.handler);
+    });
   },
   mounted() {
     this.$nextTick(function () {
@@ -47,7 +53,7 @@ export default {
   methods: {
     initHeaderEvents() {
       let self = this;
-      this.$header.on('mousedown', function (e) {
+      let onMouseDown = function (e) {
         let offset = self.$header.offset();
         Object.assign(self.moveObj, {
           startMoving: true,
@@ -56,9 +62,12 @@ export default {
           top: offset.top,
           left: offset.left
         });
-      });
+      };
+      this.$header.on('mousedown', onMouseDown);
+      this.events.push({ target: this.$header, name: 'mousedown', handler: onMouseDown });
+
       let $doc = $(document);
-      $doc.on('mousemove', _.throttle(function (e) {
+      let onMouseover = _.throttle(function (e) {
         if (e.which !== 1 || !self.moveObj.startMoving) return;
         let moveX = e.pageX - self.moveObj.pageX;
         let moveY = e.pageY - self.moveObj.pageY;
@@ -68,10 +77,15 @@ export default {
           top: `${top}px`,
           left: `${left}px`
         })
-      }, 10));
-      $doc.on('mouseup', function () {
+      }, 10);
+      $doc.on('mousemove', onMouseover);
+      this.events.push({ target: $doc, name: 'mousemove', handler: onMouseover });
+
+      let onMouseup = function () {
         self.moveObj.startMoving = false;
-      });
+      };
+      $doc.on('mouseup', onMouseup);
+      this.events.push({ target: $doc, name: 'mouseup', handler: onMouseup });
     },
     minisize() {
       $(this.$el).addClass('minisize');
@@ -84,7 +98,6 @@ export default {
       this.$emit('input', this.value);
     },
     clear() {
-      console.log('clear');
       this.value.logList = [];
     }
   }
