@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.5.0 (2016-12-06)
+
+- 增加多语言支持，支持 "en", "zh-cn" 切换
+
 ## 0.4.0 (2016-11-29)
 
 - 修复自动失败登录时，无法跳转到登录页面的bug

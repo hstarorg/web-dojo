@@ -46,25 +46,25 @@
             </div>
             <div class="textbox-wrap">
               <label>
-                <input class="remember-box" type="checkbox" v-model="remember">&nbsp;Remember Me
+                <input class="remember-box" type="checkbox" v-model="remember">{{$t('login.remember')}}
               </label>
             </div>
             <div class="login-form-action clearfix">
-              <button type="submit" :disabled="!user.username || !user.password || isLogining" class="btn btn-success pull-right green-btn">Log In <i class="fa fa-chevron-right"></i></button>
+              <button type="submit" :disabled="!user.username || !user.password || isLogining" class="btn btn-success pull-right green-btn">{{$t('login.loginBtn')}} <i class="fa fa-chevron-right"></i></button>
             </div>
           </form>
         </div>
         <div class="login-form-links link1 animated fadeInLeftBig" data-animation="fadeInLeftBig" data-animation-delay=".2s" style="animation-delay: 0.2s;">
-          <h4 class="blue">Don't have an Account?</h4>
-          <span>No worry,</span>
-          <router-link to="/register" class="blue">Click Here</router-link>
-          <span>to create acount.</span>
+          <h4 class="blue">{{$t('login.noAccountTitle')}}</h4>
+          <span>{{$t('login.noWarry')}}</span>
+          <router-link to="/register" class="blue">{{$t('login.clickHere')}}</router-link>
+          <span>{{$t('login.createAccountLabel')}}</span>
         </div>
         <div class="login-form-links link2 animated fadeInRightBig" data-animation="fadeInRightBig" data-animation-delay=".4s" style="animation-delay: 0.4s;">
-          <h4 class="green">Forget your Password?</h4>
-          <span>Dont worry,</span>
-          <a href="javascript:void(0)" class="green">Click Here</a>
-          <span>to Get New One</span>
+          <h4 class="green">{{$t('login.forgotPwdTitle')}}</h4>
+          <span>{{$t('login.noWarry')}}</span>
+          <a href="javascript:void(0)" class="green">{{$t('login.clickHere')}}</a>
+          <span>{{$t('login.resetPwdLabel')}}</span>
         </div>
       </div>
     </div>
