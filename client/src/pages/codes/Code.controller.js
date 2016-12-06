@@ -185,6 +185,7 @@ export default {
             this.jsCode = code.javascript;
             this.cssCode = code.css;
             this.setCodeStatus(false);
+            this.currentTempalteName = 'HTML';
             this.runCode();
           }).catch(() => {
             this.$router.push('/');
