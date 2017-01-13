@@ -15,7 +15,7 @@
       background: transparent;
     }
   }
-  
+
   .remember-box {
     float: left;
     width: auto !important;

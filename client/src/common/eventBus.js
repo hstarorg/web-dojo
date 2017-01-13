@@ -24,7 +24,7 @@ export const eventBus = {
       }
     }
   },
-  
+
   /**
    * 触发事件
    * @param eventName 要触发的事件名称

@@ -81,7 +81,7 @@ export default {
   methods: {
     ...mapActions([
       'setCodeStatus'
-    ]), 
+    ]),
     onMousedown(e) {
       this.moveObj.startX = e.pageX;
       this.moveObj.isMoving = true;

@@ -63,7 +63,4 @@
 
 	</div>
 </template>
-<script>
-  import consoleController from './console.controller.js';
-  export default consoleController;
-</script>
+<script src="./console.controller.js"></script>

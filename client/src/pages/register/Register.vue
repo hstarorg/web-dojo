@@ -4,7 +4,7 @@
   html {
     height: 100%;
   }
-  
+
   .page-register {
     background-color: #1abc9c;
     background-image: radial-gradient(circle farthest-side at center top, #55e7ca 0%, #1abc9c 100%);

@@ -52,8 +52,8 @@ export const ajax = {
   },
   /**
    * DELETE data
-   * 
-   * 
+   *
+   *
    */
   delete(url, options) {
     return _request('delete', url, null, _buildOptions('delete', options));

@@ -62,15 +62,15 @@
 				}
 			}
 			.drag-line{
-				top: 0; 
-				left: -4px; 
-				width: 7px; 
-				height: 100%; 
-				position: absolute; 
+				top: 0;
+				left: -4px;
+				width: 7px;
+				height: 100%;
+				position: absolute;
 				z-index: 1;
 				cursor: ew-resize;
 			}
-			
+
 			.container-slider {
 				position: absolute;
 				background: transparent;
