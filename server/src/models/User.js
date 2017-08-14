@@ -2,8 +2,10 @@ const db = require('./../common/db');
 const Schema = db.Schema;
 
 const userSchema = new Schema({
+  unionId: Number, // 用户ID
   username: String, // 用户名
   password: String, // 密码
+  avatarUrl: String, // 头像
   registerDate: { type: Date, default: Date.now }, // 注册时间
   token: { type: String, default: '' }, // 授权token
   expireTime: { type: Date, default: Date.now } // token有效期
