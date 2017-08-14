@@ -21,6 +21,14 @@ export const auth = {
       });
   },
 
+  doSsoLogin(code) {
+    return ajax.post(`${AppConf.apiHost}/auth/ssologin`, { code })
+      .then(data => {
+        this._processLoginData(data);
+        return true;
+      });
+  },
+
   autoLogin() {
     let token = storage.local.get('x-token');
     if (!token) {
@@ -43,7 +51,10 @@ export const auth = {
     }
     p.then(() => {
       if (!store.state.isLogged) {
-        return next({ path: '/login', query: { redirect: to.fullPath } });
+        storage.session.set('redirect_url', to.fullPath);
+        location.href = `${AppConf.ssoAddress}`;
+        return;
+        // return next({ path: '/login', query: { redirect: to.fullPath } });
       }
       next();
     });
