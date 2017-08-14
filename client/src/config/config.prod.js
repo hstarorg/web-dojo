@@ -1,6 +1,6 @@
 const conf = {
-  apiHost: 'http://chat.hstar.org:7411/api/v1',
-  ssoAddress: 'https://sso.hstar.org/login?appKey=4f0b9057-c02a-401b-b73c-c6a5dec99073'
+  apiHost: 'http://t.hstar.org:4998/api/v1',
+  ssoAddress: 'https://sso.hstar.org/login?appKey=498a9eeb-ca65-4fe6-b85e-be2a12916fcd'
 };
 
 window.AppConf = conf;

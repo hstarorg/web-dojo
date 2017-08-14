@@ -65,7 +65,6 @@ const getMyCodes = (req, res, next) => {
       { codeTags: search }
     ]
   }
-  console.log(filter);
   db.queryPaginationData(Code, filter, { pageIndex, pageSize }, { lastUpdated: -1 })
     .then(data => {
       res.send(data);

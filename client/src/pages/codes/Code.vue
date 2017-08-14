@@ -110,7 +110,7 @@
 								<button type="button" class="btn btn-label">	{{currentTempalteName}}</button>
 								<ul class="dropdown-menu" role="menu">
 									<li v-for="item in templates" @click="changeTemplate(item.name)"><a href="javascript:void(0)">{{ item.text }}</a></li>
-								</ul>
+                </ul>
 							</div>
 						</a>
 					</li>
