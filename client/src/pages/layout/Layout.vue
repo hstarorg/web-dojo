@@ -1,3 +1,18 @@
+<style>
+  .slide-left-enter,
+  .slide-right-leave-active {
+    opacity: 0;
+    -webkit-transform: translate(30px, 0);
+    transform: translate(30px, 0);
+  }
+
+  .slide-left-leave-active,
+  .slide-right-enter {
+    opacity: 0;
+    -webkit-transform: translate(-30px, 0);
+    transform: translate(-30px, 0);
+  }
+</style>
 <template>
   <div class="warpper">
     <header>
@@ -53,8 +68,8 @@
       </nav>
     </header>
     <div class="page-content">
-      <transition name="slide">
-        <router-view></router-view>
+      <transition :name="transitionName">
+        <router-view class="child-view"></router-view>
       </transition>
     </div>
     <footer>

@@ -5,10 +5,9 @@ export default {
   //Why use this? 要为每个组件创建自己独立的data实例。
   data() {
     return {
-      searchKey: 'abc'
+      searchKey: '',
+      transitionName: 'slide-left'
     };
-  },
-  mounted() {
   },
   computed: {
     ...mapGetters([
