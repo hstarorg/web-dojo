@@ -45,55 +45,35 @@ const doSsoLogin = async (req, res, next) => {
   } else { // 非首次登录
     await User.findOneAndUpdate({ unionId: user.unionId }, { $set: { displayName: userData.DisplayName, token: token, expireTime: Date.now() + EXPIRE_TIME_SPAN } });
   }
-  return res.send({
+  res.send({
     token,
     user: {
       username: user.username,
-      displayName: user.displayName
+      displayName: user.displayName,
+      avatarUrl: user.avatarUrl
+    }
+  });
+};
+
+const doAutoLogin = async (req, res, next) => {
+  let token = req.body.token;
+  let user = await User.findOne({ token: token, expireTime: { $gt: Date.now() } });
+  if (!user) {
+    return res.send(new BusError('auto login failed.'));
+  }
+  res.send({
+    token,
+    user: {
+      username: user.username,
+      displayName: user.displayName,
+      avatarUrl: user.avatarUrl
     }
   });
 };
 
 module.exports = {
   doSsoLogin,
-  doLogin(req, res, next) {
-    let data = req.body;
-    User.findOne({ username: data.username, password: data.password })
-      .then(user => {
-        if (!user) {
-          return res.send(new BusError('user not found.'));
-        }
-        let token = util.buildHash(user._id, 30);
-        return User.findOneAndUpdate({ _id: user._id }, { $set: { token: token, expireTime: Date.now() + EXPIRE_TIME_SPAN } })
-          .then(data => {
-            res.send({
-              token: token,
-              user: {
-                username: user.username
-              }
-            });
-          });
-      })
-      .catch(reason => next(reason));
-  },
-
-  doAutoLogin(req, res, next) {
-    let token = req.body.token;
-    User.findOne({ token: token, expireTime: { $gt: Date.now() } })
-      .then(user => {
-        if (!user) {
-          return res.send(new BusError('auto login failed.'));
-        }
-        res.send({
-          token: token,
-          user: {
-            username: user.username
-          }
-        });
-      })
-      .catch(reason => next(reason));
-  },
-
+  doAutoLogin,
   validateUser(req, res, next) {
     let token = req.headers['x-token'];
     if (!token) {

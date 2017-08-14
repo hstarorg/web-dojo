@@ -24,16 +24,22 @@ const createCode = (req, res, next) => {
   });
 };
 
-const updateCode = (req, res, next) => {
-  let body = req.body;
+const updateCode = async (req, res, next) => {
+  let userId = req.reqObj.userId;
+  let codeId = req.params.codeId;
+  let data = req.body;
   let updatedData = {
     $set: {
-      javascript: body.javascript,
-      html: body.html,
-      css: body.css
+      javascript: data.javascript,
+      html: data.html,
+      css: data.css
     }
   };
-  Code.update({ codeId: req.params.codeId }, updatedData, (err, code) => {
+  let c = await Code.count({ codeId, userId });
+  if (c === 0) {
+    return res.sendStatus(403);
+  }
+  Code.update({ codeId, userId }, updatedData, (err, code) => {
     if (err) return next(err);
     res.status(202);
     res.send(code);

@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.3.x (2017-08-xx)
+
+- 限制更改他人的Code
+
 ## 0.3.0 (2017-08-14)
 
 - 升级整体依赖库
