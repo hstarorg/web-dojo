@@ -1,9 +1,13 @@
-export * from './ajax.js';
+import { ajax } from './ajax';
+import { eventBus } from './eventBus';
+import { i18nHelper } from './i18nHelper';
+import { layer } from './layer';
+import { storage } from './storage';
 
-export * from './eventBus.js';
-
-export * from './storage.js';
-
-export * from './layer.js';
-
-export * from './i18nHelper.js';
+export {
+  ajax,
+  eventBus,
+  i18nHelper,
+  layer,
+  storage
+};

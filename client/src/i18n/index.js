@@ -1,14 +1,12 @@
-import { I18nHelper } from './../common';
+import { i18nHelper } from './../common';
 
 import { langEn } from './lang_en';
 import { langCn } from './lang_zh-cn';
 
-// Init Vue-i18n
-I18nHelper.init();
-I18nHelper.setLang('zh-cn');
+i18nHelper.setLang('zh-cn');
 
-I18nHelper.addLocale('en', langEn);
+i18nHelper.addLocale('en', langEn);
 
-I18nHelper.addLocale('zh-cn', langCn);
+i18nHelper.addLocale('zh-cn', langCn);
 
-I18nHelper.loadLocal();
+i18nHelper.loadLocal();

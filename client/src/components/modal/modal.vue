@@ -2,11 +2,11 @@
   .modal {
     transition: all 0.3s ease;
   }
-  
+
   .modal.in {
     background-color: rgba(0, 0, 0, 0.5);
   }
-  
+
   .modal.zoom .modal-dialog {
     -webkit-transform: scale(0.1);
     -moz-transform: scale(0.1);
@@ -18,7 +18,7 @@
     -moz-transition: all 0.3s;
     transition: all 0.3s;
   }
-  
+
   .modal.zoom.in .modal-dialog {
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
@@ -62,101 +62,102 @@
 </template>
 
 <script>
-import {coerce, getScrollBarWidth} from './../utils/utils.js';
-const $ = window.jQuery;
-export default {
-  name: 'modal',
-  props: {
-    okText: {
-      type: String,
-      default: 'Save changes'
-    },
-    cancelText: {
-      type: String,
-      default: 'Close'
-    },
-    title: {
-      type: String,
-      default: ''
-    },
-    value: {
-      required: true,
-      type: Boolean,
-      coerce: coerce.boolean
-    },
-    width: {
-      default: null
-    },
-    callback: {
-      type: Function,
-      default () {}
-    },
-    effect: {
-      type: String,
-      default: null
-    },
-    backdrop: {
-      type: Boolean,
-      coerce: coerce.boolean,
-      default: true
-    },
-    large: {
-      type: Boolean,
-      coerce: coerce.boolean,
-      default: false
-    },
-    small: {
-      type: Boolean,
-      coerce: coerce.boolean,
-      default: false
-    }
-  },
-  computed: {
-    optionalWidth () {
-      if (this.width === null) {
-        return null
-      } else if (Number.isInteger(this.width)) {
-        return this.width + 'px'
+  import { coerce, getScrollBarWidth } from './../utils/utils.js';
+  const $ = window.jQuery;
+  export default {
+    name: 'modal',
+    props: {
+      okText: {
+        type: String,
+        default: 'Save changes'
+      },
+      cancelText: {
+        type: String,
+        default: 'Close'
+      },
+      title: {
+        type: String,
+        default: ''
+      },
+      value: {
+        required: true,
+        type: Boolean,
+        coerce: coerce.boolean
+      },
+      width: {
+        default: null
+      },
+      callback: {
+        type: Function,
+        default() { }
+      },
+      effect: {
+        type: String,
+        default: null
+      },
+      backdrop: {
+        type: Boolean,
+        coerce: coerce.boolean,
+        default: true
+      },
+      large: {
+        type: Boolean,
+        coerce: coerce.boolean,
+        default: false
+      },
+      small: {
+        type: Boolean,
+        coerce: coerce.boolean,
+        default: false
       }
-      return this.width
-    }
-  },
-  watch: {
-    value (val) {
-      const el = this.$el
-      const body = document.body
-      const scrollBarWidth = getScrollBarWidth()
-      if (val) {
-        $(el).find('.modal-content').focus()
-        el.style.display = 'block'
-        setTimeout(() => $(el).addClass('in'), 0)
-        $(body).addClass('modal-open')
-        if (scrollBarWidth !== 0) {
-          body.style.paddingRight = scrollBarWidth + 'px'
+    },
+    computed: {
+      optionalWidth() {
+        if (this.width === null) {
+          return null
+        } else if (Number.isInteger(this.width)) {
+          return this.width + 'px'
         }
-        if (this.backdrop) {
-          $(el).on('click', e => {
-            if (e.target === el) {
-              this.value = false;
-              this.$emit('input', false);
-            }
+        return this.width
+      }
+    },
+    watch: {
+      value(val) {
+        const el = this.$el
+        const body = document.body
+        const scrollBarWidth = getScrollBarWidth()
+        if (val) {
+          $(el).find('.modal-content').focus()
+          el.style.display = 'block'
+          setTimeout(() => $(el).addClass('in'), 0)
+          $(body).addClass('modal-open')
+          if (scrollBarWidth !== 0) {
+            body.style.paddingRight = scrollBarWidth + 'px'
+          }
+          if (this.backdrop) {
+            $(el).on('click', e => {
+              if (e.target === el) {
+                this.value = false;
+                this.$emit('input', false);
+              }
+            })
+          }
+        } else {
+          body.style.paddingRight = null
+          $(body).removeClass('modal-open')
+          $(el).removeClass('in').on('transitionend', () => {
+            $(el).off('click transitionend')
+            el.style.display = 'none'
           })
         }
-      } else {
-        body.style.paddingRight = null
-        $(body).removeClass('modal-open')
-        $(el).removeClass('in').on('transitionend', () => {
-          $(el).off('click transitionend')
-          el.style.display = 'none'
-        })
+      }
+    },
+    methods: {
+      close() {
+        this.show = false
+        this.$emit('input', false);
       }
     }
-  },
-  methods: {
-    close () {
-      this.show = false
-      this.$emit('input', false);
-    }
   }
-}
+
 </script>
