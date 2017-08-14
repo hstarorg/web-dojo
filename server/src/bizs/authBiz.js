@@ -79,7 +79,6 @@ module.exports = {
     let token = req.body.token;
     User.findOne({ token: token, expireTime: { $gt: Date.now() } })
       .then(user => {
-        console.log(user);
         if (!user) {
           return res.send(new BusError('auto login failed.'));
         }

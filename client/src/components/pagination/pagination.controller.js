@@ -64,7 +64,6 @@ export default {
         return;
       }
       this.$emit('input', p);
-      console.log(this.value);
     }
   }
 };
