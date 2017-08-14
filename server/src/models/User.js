@@ -4,6 +4,7 @@ const Schema = db.Schema;
 const userSchema = new Schema({
   unionId: Number, // 用户ID
   username: String, // 用户名
+  displayName: String, // 显示名称
   password: String, // 密码
   avatarUrl: String, // 头像
   registerDate: { type: Date, default: Date.now }, // 注册时间

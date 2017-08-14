@@ -28,6 +28,7 @@ const doSsoLogin = async (req, res, next) => {
     user = new User({
       unionId: userData.UnionId, // 用户ID
       username: userData.UserName, // 用户名
+      displayName: userData.DisplayName, // 显示名称
       avatarUrl: userData.AvatarUrl,
       password: '', // 密码
       registerDate: new Date(userData.CreateDate),
@@ -42,12 +43,13 @@ const doSsoLogin = async (req, res, next) => {
     });
 
   } else { // 非首次登录
-    await User.findOneAndUpdate({ unionId: user.unionId }, { $set: { token: token, expireTime: Date.now() + EXPIRE_TIME_SPAN } });
+    await User.findOneAndUpdate({ unionId: user.unionId }, { $set: { displayName: userData.DisplayName, token: token, expireTime: Date.now() + EXPIRE_TIME_SPAN } });
   }
   return res.send({
     token,
     user: {
-      username: user.username
+      username: user.username,
+      displayName: user.displayName
     }
   });
 };

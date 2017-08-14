@@ -2,7 +2,7 @@ const db = require('./../common/db');
 const Schema = db.Schema;
 
 const gistSchema = new Schema({
-  userId: String, //所有者，
+  userId: [Number, String], //所有者，
   gistId: String, //片段ID
   gistName: String, //片段名称
   gistDescription: String, //片段描述信息
