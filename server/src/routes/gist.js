@@ -2,11 +2,13 @@ let router = new Router();
 let gistBiz = require('./../bizs/gistBiz');
 let authBiz = require('./../bizs/authBiz');
 
-router.post('/', authBiz.validateUser, gistBiz.createGist);
-
-router.get('/mygists', authBiz.validateUser, gistBiz.getGists);
-
-router.get('/:gistId', gistBiz.getGist);
+router
+  // 创建Gist
+  .post('/', authBiz.validateUser, gistBiz.createGist)
+  // 获取我的gist
+  .get('/mygists', authBiz.validateUser, gistBiz.getGists)
+  // 获取特定的gist
+  .get('/:gistId', gistBiz.getGist);
 
 module.exports = {
   priority: 0,

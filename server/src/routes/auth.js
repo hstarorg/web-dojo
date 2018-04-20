@@ -2,8 +2,11 @@ const router = new Router();
 const { util } = require('../common');
 const authBiz = require('./../bizs/authBiz');
 
-router.post('/autologin', util.asyncBusinessFn(authBiz.doAutoLogin));
-router.post('/ssologin', util.asyncBusinessFn(authBiz.doSsoLogin));
+router
+  // 自动登录
+  .post('/autologin', util.asyncBusinessFn(authBiz.doAutoLogin))
+  // SSO登录
+  .post('/ssologin', util.asyncBusinessFn(authBiz.doSsoLogin));
 
 module.exports = {
   priority: 0,
