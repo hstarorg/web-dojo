@@ -11,10 +11,11 @@ export default {
     doSsoLogin() {
       let code = util.getQuery('code');
       if (!code) {
-        return location.href = '/';
+        return (location.href = '/');
       }
       // login
-      auth.doSsoLogin(code)
+      auth
+        .doSsoLogin(code)
         .then(() => {
           let redirectUrl = storage.session.get('redirect_url') || '/';
           this.$router.push(redirectUrl);

@@ -63,4 +63,5 @@
 
 	</div>
 </template>
-<script src="./console.controller.js"></script>
+<script src="./console.controller.js">
+</script>

@@ -2,7 +2,7 @@ export default {
   props: {
     value: {
       type: Number,
-      default: 1,
+      default: 1
     },
     totalCount: {
       type: Number,

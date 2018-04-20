@@ -5,12 +5,12 @@
 }
 
 /* --Webkit滚动条样式修改-- */
-$scroller{
+$scroller {
   &::-webkit-scrollbar {
     width: 5px;
   }
   &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, .9);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.9);
     border-radius: 10px;
   }
   &::-webkit-scrollbar-thumb {
@@ -21,17 +21,16 @@ $scroller{
   }
 }
 
-
 /* 设置背景图 */
 body {
   background: url(./../../static/images/bg4.jpg) repeat;
   @extend $scroller;
 }
-.container{
+.container {
   background: #fff;
 }
 
-.page-content{
+.page-content {
   position: absolute;
   top: 50px;
   left: 0;
@@ -39,6 +38,6 @@ body {
   bottom: 0;
   padding-top: 15px;
 }
-.ace_scrollbar{
+.ace_scrollbar {
   @extend $scroller;
 }

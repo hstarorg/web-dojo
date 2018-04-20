@@ -47,4 +47,5 @@
     </div>
   </div>
 </template>
-<script src="./GistDetail.controller.js"></script>
+<script src="./GistDetail.controller.js">
+</script>

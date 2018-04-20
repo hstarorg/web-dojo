@@ -1,9 +1,8 @@
 export const util = {
   copyProperties(source, target) {
-    Object.keys(target)
-      .forEach(key => {
-        target[key] = source[key];
-      });
+    Object.keys(target).forEach(key => {
+      target[key] = source[key];
+    });
   },
 
   clearObject(obj) {
@@ -18,7 +17,7 @@ export const util = {
     let queryObj = {};
     queryArr.forEach(item => {
       let kvArr = item.split('=');
-      queryObj[kvArr[0]] = (kvArr[1] || null); // 设置为null，和undefined区分开
+      queryObj[kvArr[0]] = kvArr[1] || null; // 设置为null，和undefined区分开
     });
     return key ? queryObj[key] : queryObj;
   },

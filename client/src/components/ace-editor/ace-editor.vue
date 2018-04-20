@@ -10,4 +10,5 @@
     <pre :id="editorId" :style="{height: this.height + 'px'}"></pre>
   </div>
 </template>
-<script src="./ace-editor.controller.js"></script>
+<script src="./ace-editor.controller.js">
+</script>

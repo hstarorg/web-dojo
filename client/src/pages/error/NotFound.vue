@@ -3,4 +3,5 @@
     <h1>404</h1>
   </div>
 </template>
-<script src="./NotFound.controller.js"></script>
+<script src="./NotFound.controller.js">
+</script>

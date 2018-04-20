@@ -10,15 +10,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      'isNewCode',
-      'userInfo'
-    ])
+    ...mapGetters(['isNewCode', 'userInfo'])
   },
   methods: {
-    ...mapActions([
-      'setCodeStatus'
-    ]),
+    ...mapActions(['setCodeStatus']),
 
     createCode(evt) {
       this.setCodeStatus(true);

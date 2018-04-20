@@ -25,7 +25,7 @@ export default {
     });
   },
   mounted() {
-    this.$nextTick(function () {
+    this.$nextTick(function() {
       this.$header = $(this.$el.querySelector('.dojo-console-header'));
       this.initHeaderEvents();
     });
@@ -53,7 +53,7 @@ export default {
   methods: {
     initHeaderEvents() {
       let self = this;
-      let onMouseDown = function (e) {
+      let onMouseDown = function(e) {
         let offset = self.$header.offset();
         Object.assign(self.moveObj, {
           startMoving: true,
@@ -67,7 +67,7 @@ export default {
       this.events.push({ target: this.$header, name: 'mousedown', handler: onMouseDown });
 
       let $doc = $(document);
-      let onMouseover = _.throttle(function (e) {
+      let onMouseover = _.throttle(function(e) {
         if (e.which !== 1 || !self.moveObj.startMoving) return;
         let moveX = e.pageX - self.moveObj.pageX;
         let moveY = e.pageY - self.moveObj.pageY;
@@ -76,12 +76,12 @@ export default {
         self.$header.parent().css({
           top: `${top}px`,
           left: `${left}px`
-        })
+        });
       }, 10);
       $doc.on('mousemove', onMouseover);
       this.events.push({ target: $doc, name: 'mousemove', handler: onMouseover });
 
-      let onMouseup = function () {
+      let onMouseup = function() {
         self.moveObj.startMoving = false;
       };
       $doc.on('mouseup', onMouseup);

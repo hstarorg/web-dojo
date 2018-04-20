@@ -11,7 +11,8 @@ const request = (method, url, data, config = {}) => {
   options.headers = options.headers || {};
   options.headers['x-sw-admin-token'] = store.state.token;
   return new Promise((resolve, reject) => {
-    axios.request(options)
+    axios
+      .request(options)
       .then(res => {
         let data = res.data;
         if (data.hasError) {
@@ -21,7 +22,8 @@ const request = (method, url, data, config = {}) => {
           }
         }
         resolve(data);
-      }).catch(res => {
+      })
+      .catch(res => {
         if (!res.config.notNotifyError) {
           layer.error(res.message);
         }

@@ -12,7 +12,12 @@ export default {
   },
   computed: {
     disableSubmit() {
-      return !this.user.username || !this.user.password || !this.user.confirmPassword || this.user.password !== this.user.confirmPassword
+      return (
+        !this.user.username ||
+        !this.user.password ||
+        !this.user.confirmPassword ||
+        this.user.password !== this.user.confirmPassword
+      );
     }
   },
   methods: {

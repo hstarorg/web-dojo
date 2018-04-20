@@ -29,4 +29,5 @@
     </div>
   </div>
 </template>
-<script src="./Login.controller.js"></script>
+<script src="./Login.controller.js">
+</script>

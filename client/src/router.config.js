@@ -1,23 +1,21 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-Vue.use(VueRouter);
 
 import { layer } from './common';
-import { auth } from './services';
-
-import Login from './pages/login/Login.vue';
-import Register from './pages/register/Register.vue';
-
-import Layout from './pages/layout/Layout.vue';
+import Code from './pages/codes/Code.vue';
 import MyCode from './pages/codes/MyCode.vue';
 import Square from './pages/codes/Square.vue';
-import Code from './pages/codes/Code.vue';
 import NotFound from './pages/error/NotFound.vue';
-import RedirectToCode from './pages/RedirectToCode.vue';
-import MyGist from './pages/gists/MyGist.vue';
 import AddGist from './pages/gists/AddGist.vue';
 import GistDetail from './pages/gists/GistDetail.vue';
+import MyGist from './pages/gists/MyGist.vue';
+import Layout from './pages/layout/Layout.vue';
+import Login from './pages/login/Login.vue';
+import RedirectToCode from './pages/RedirectToCode.vue';
+import Register from './pages/register/Register.vue';
+import { auth } from './services';
 
+Vue.use(VueRouter);
 const routes = [
   { path: '/login', component: Login },
   { path: '/register', component: Register },
@@ -29,7 +27,9 @@ const routes = [
     }
   },
   {
-    path: '/', component: Layout, meta: { auth: true },
+    path: '/',
+    component: Layout,
+    meta: { auth: true },
     children: [
       { path: '', component: Code },
       { path: 'new', component: RedirectToCode },

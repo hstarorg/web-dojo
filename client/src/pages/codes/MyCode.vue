@@ -56,4 +56,5 @@
     </table>
   </div>
 </template>
-<script src="./MyCode.controller.js"></script>
+<script src="./MyCode.controller.js">
+</script>

@@ -27,7 +27,7 @@ export default {
         body.scrollTop = body.scrollHeight;
       });
     },
-    goMyGists(){
+    goMyGists() {
       this.$router.push('/mygists');
     },
     removeFile(idx) {
@@ -46,13 +46,15 @@ export default {
       if (codeFiles.length < 1) {
         return layer.error('Must have one file.');
       }
-      ajax.post(`${AppConf.apiHost}/gist`, {
-        gistName: this.gistName,
-        gistDescription: this.gistDescription,
-        codeFiles
-      }).then(data => {
-        this.$router.push('/mygists');
-      });
+      ajax
+        .post(`${AppConf.apiHost}/gist`, {
+          gistName: this.gistName,
+          gistDescription: this.gistDescription,
+          codeFiles
+        })
+        .then(data => {
+          this.$router.push('/mygists');
+        });
     }
   }
 };

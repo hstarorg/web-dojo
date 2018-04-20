@@ -18,10 +18,10 @@ export const eventBus = {
     bus.$on(eventName, handler);
     if (scope) {
       let originalDestroy = scope.$destroy;
-      scope.$destroy = function () {
+      scope.$destroy = function() {
         bus.$off(eventName, handler);
         originalDestroy.call(this);
-      }
+      };
     }
   },
 

@@ -54,4 +54,5 @@
     <br><br>
   </div>
 </template>
-<script src="./MyGist.controller.js"></script>
+<script src="./MyGist.controller.js">
+</script>

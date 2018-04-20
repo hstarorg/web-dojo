@@ -175,4 +175,5 @@
 		</modal>
 	</div>
 </template>
-<script src="./Code.controller.js"></script>
+<script src="./Code.controller.js">
+</script>

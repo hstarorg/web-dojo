@@ -14,19 +14,17 @@ export const auth = {
   },
 
   login(username, password) {
-    return ajax.post(`${AppConf.apiHost}/auth/login`, { username, password })
-      .then(data => {
-        this._processLoginData(data);
-        return true;
-      });
+    return ajax.post(`${AppConf.apiHost}/auth/login`, { username, password }).then(data => {
+      this._processLoginData(data);
+      return true;
+    });
   },
 
   doSsoLogin(code) {
-    return ajax.post(`${AppConf.apiHost}/auth/ssologin`, { code })
-      .then(data => {
-        this._processLoginData(data);
-        return true;
-      });
+    return ajax.post(`${AppConf.apiHost}/auth/ssologin`, { code }).then(data => {
+      this._processLoginData(data);
+      return true;
+    });
   },
 
   autoLogin() {
@@ -34,11 +32,13 @@ export const auth = {
     if (!token) {
       return Promise.resolve();
     }
-    return ajax.post(`${AppConf.apiHost}/auth/autologin`, { token }, { notNotifyError: true })
+    return ajax
+      .post(`${AppConf.apiHost}/auth/autologin`, { token }, { notNotifyError: true })
       .then(data => {
         this._processLoginData(data, true);
         return true;
-      }).catch(() => {
+      })
+      .catch(() => {
         return Promise.resolve(false);
       });
   },

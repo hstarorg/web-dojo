@@ -34,20 +34,12 @@ export const storage = {
     }
   },
   cookie: {
-    get(key) {
+    get(key) {},
 
-    },
+    set(key, value, expire) {},
 
-    set(key, value, expire) {
+    remove(key) {},
 
-    },
-
-    remove(key) {
-
-    },
-
-    removeAll() {
-
-    }
-  },
+    removeAll() {}
+  }
 };

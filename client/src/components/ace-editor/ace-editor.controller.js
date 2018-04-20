@@ -10,12 +10,12 @@ function unpacker_filter(source) {
       found = true;
       comment = source.substr(0, source.indexOf('*/') + 2);
       source = source.substr(comment.length).replace(/^\s+/, '');
-      trailing_comments += comment + "\n";
+      trailing_comments += comment + '\n';
     } else if (/^\s*\/\//.test(source)) {
       found = true;
       comment = source.match(/^\s*\/\/.*/)[0];
       source = source.substr(comment.length).replace(/^\s+/, '');
-      trailing_comments += comment + "\n";
+      trailing_comments += comment + '\n';
     }
   } while (found);
   var unpackers = [P_A_C_K_E_R, Urlencoded, JavascriptObfuscator, MyObfuscate];
@@ -56,14 +56,16 @@ export default {
   }, //['value', 'mode', 'theme', 'height'],
   data() {
     return {
-      editorId: `ace-editor-${Math.random().toString(16).replace('.', '')}`,
+      editorId: `ace-editor-${Math.random()
+        .toString(16)
+        .replace('.', '')}`,
       editor: null,
       editorValueCache: ''
     };
   },
   mounted() {
-    this.$nextTick(function () {
-      let editor = this.editor = ace.edit(this.editorId);
+    this.$nextTick(function() {
+      let editor = (this.editor = ace.edit(this.editorId));
       editor.$blockScrolling = Infinity;
       editor.session.setMode(`ace/mode/${this.mode}`);
       editor.setTheme(`ace/theme/${this.theme}`);
@@ -86,7 +88,7 @@ export default {
           editor.setValue(formattedVal, 1);
         }
       });
-      editor.on('change', function (e) {
+      editor.on('change', function(e) {
         let val = self.editor.getValue();
         self.$emit('input', val);
         self.editorValueCache = val;

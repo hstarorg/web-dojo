@@ -24,10 +24,13 @@ export default {
   },
   methods: {
     fetchCodes(isSearch) {
-      if(isSearch){
+      if (isSearch) {
         this.curPage = 1;
       }
-      ajax.get(`${AppConf.apiHost}/gist/mygists`, { params: { pageIndex: this.curPage, pageSize: this.pageSize, search: this.searchKeyword } })
+      ajax
+        .get(`${AppConf.apiHost}/gist/mygists`, {
+          params: { pageIndex: this.curPage, pageSize: this.pageSize, search: this.searchKeyword }
+        })
         .then(data => {
           this.gists = data.data;
           this.totalCount = data.totalCount;
@@ -36,7 +39,7 @@ export default {
     goCreate() {
       this.$router.push('/newgist');
     },
-    clearSearch(){
+    clearSearch() {
       this.searchKeyword = '';
       this.curPage = 1;
       this.fetchCodes();

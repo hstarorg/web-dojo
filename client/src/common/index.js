@@ -5,11 +5,4 @@ import { layer } from './layer';
 import { storage } from './storage';
 import { util } from './util';
 
-export {
-  ajax,
-  eventBus,
-  i18nHelper,
-  layer,
-  storage,
-  util
-};
+export { ajax, eventBus, i18nHelper, layer, storage, util };

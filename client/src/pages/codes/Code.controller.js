@@ -37,7 +37,7 @@ export default {
         logList: [],
         unreadCount: 0
       }
-    }
+    };
   },
   created() {
     let self = this;
@@ -46,26 +46,36 @@ export default {
       return { name: x, text: codeTemplates[x].text };
     });
     this.fetchCode();
-    window.addEventListener('message', function (evt) {
-      if (!evt.data || !evt.data.funName) return;
-      self.logConsole.logList.push(evt.data);
-    }, false);
+    window.addEventListener(
+      'message',
+      function(evt) {
+        if (!evt.data || !evt.data.funName) return;
+        self.logConsole.logList.push(evt.data);
+      },
+      false
+    );
   },
   mounted() {
     this.setEditorHeight();
-    eventBus.on('code.update', () => {
-      this.updateCode();
-    }, this);
+    eventBus.on(
+      'code.update',
+      () => {
+        this.updateCode();
+      },
+      this
+    );
     // let slider = this.$el.querySelector('.container-slider > div');
     // slider.addEventListener('mousedown', this.onMousedown.bind(this));
     // document.addEventListener('mousemove', this.onMouseMove.bind(this));
     // document.addEventListener('mouseup', this.onMouseUp.bind(this));
-    $(window).off('keydown').on('keydown', (evt) => {
-      if (evt.keyCode === 83 && evt.ctrlKey) {
-        this.updateCode();
-        return false;
-      }
-    });
+    $(window)
+      .off('keydown')
+      .on('keydown', evt => {
+        if (evt.keyCode === 83 && evt.ctrlKey) {
+          this.updateCode();
+          return false;
+        }
+      });
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.setEditorHeight);
@@ -79,9 +89,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      'setCodeStatus'
-    ]),
+    ...mapActions(['setCodeStatus']),
     onMousedown(e) {
       this.moveObj.startX = e.pageX;
       this.moveObj.isMoving = true;
@@ -92,7 +100,7 @@ export default {
       this.jsCode = template.javascript;
       this.htmlCode = template.html;
       this.cssCode = template.css;
-      this.$nextTick(function () {
+      this.$nextTick(function() {
         this.runCode();
       });
     },
@@ -115,7 +123,8 @@ export default {
 
     _buildHtmlCodeForPreview() {
       let html = this.htmlCode;
-      html = html.replace(/<head>/, `<head><script src="/static/vendor/console.mock.js"></script>`)
+      html = html
+        .replace(/<head>/, `<head><script src="/static/vendor/console.mock.js"></script>`)
         .replace(/<\/head>/, `<style>${this.cssCode}</style></head>`);
       html = html.replace(/<\/body>/, `<script>${this.jsCode}</script></body>`);
       return html;
@@ -142,11 +151,12 @@ export default {
     updateCode() {
       if (this.codeId) {
         // Update
-        ajax.put(`${AppConf.apiHost}/code/${this.codeId}`, {
-          javascript: this.jsCode,
-          html: this.htmlCode,
-          css: this.cssCode
-        })
+        ajax
+          .put(`${AppConf.apiHost}/code/${this.codeId}`, {
+            javascript: this.jsCode,
+            html: this.htmlCode,
+            css: this.cssCode
+          })
           .then(data => {
             layer.msg('Save successfully.');
             this.runCode();
@@ -159,27 +169,30 @@ export default {
     },
 
     createCode() {
-      ajax.post(`${AppConf.apiHost}/code`, {
-        javascript: this.jsCode,
-        html: this.htmlCode,
-        css: this.cssCode,
-        codeName: this.codeObj.codeName,
-        codeDescription: this.codeObj.codeDescription || '',
-        codeTags: this.codeObj.codeTags.split(',').filter(x => !!x),
-        isPrivate: this.codeObj.isPrivate
-      }).then(data => {
-        this.codeId = data.codeId;
-        this.$router.push(`/${data.codeId}`)
-        layer.msg('Create code successfully.');
-        this.showsaveDialog = false;
-        this.runCode();
-      });
+      ajax
+        .post(`${AppConf.apiHost}/code`, {
+          javascript: this.jsCode,
+          html: this.htmlCode,
+          css: this.cssCode,
+          codeName: this.codeObj.codeName,
+          codeDescription: this.codeObj.codeDescription || '',
+          codeTags: this.codeObj.codeTags.split(',').filter(x => !!x),
+          isPrivate: this.codeObj.isPrivate
+        })
+        .then(data => {
+          this.codeId = data.codeId;
+          this.$router.push(`/${data.codeId}`);
+          layer.msg('Create code successfully.');
+          this.showsaveDialog = false;
+          this.runCode();
+        });
     },
 
     fetchCode() {
       this.codeId = this.$route.params.id;
       if (this.codeId) {
-        ajax.get(`${AppConf.apiHost}/code/${this.codeId}`)
+        ajax
+          .get(`${AppConf.apiHost}/code/${this.codeId}`)
           .then(code => {
             this.htmlCode = code.html;
             this.jsCode = code.javascript;
@@ -187,7 +200,8 @@ export default {
             this.setCodeStatus(false);
             this.currentTempalteName = 'HTML';
             this.runCode();
-          }).catch(() => {
+          })
+          .catch(() => {
             this.$router.push('/');
           });
       } else {

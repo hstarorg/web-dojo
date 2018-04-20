@@ -73,4 +73,5 @@
     </div>
   </div>
 </template>
-<script src="./AddGist.controller.js"></script>
+<script src="./AddGist.controller.js">
+</script>

@@ -17,11 +17,13 @@ export default {
   methods: {
     fetchData() {
       this.gistId = this.$route.params.id;
-      ajax.get(`${AppConf.apiHost}/gist/${this.gistId}`)
+      ajax
+        .get(`${AppConf.apiHost}/gist/${this.gistId}`)
         .then(gist => {
           this.gist = gist;
           console.log(gist);
-        }).catch(() => {
+        })
+        .catch(() => {
           layer.error('Has some error, please retry.');
         });
     },

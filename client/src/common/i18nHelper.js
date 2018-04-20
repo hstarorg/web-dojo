@@ -29,7 +29,7 @@ class I18nHelper {
 
   loadLocal() {
     Object.keys(locals).forEach(lang => {
-      this.i18n.setLocaleMessage(lang, locals[lang])
+      this.i18n.setLocaleMessage(lang, locals[lang]);
     });
   }
 

@@ -15,4 +15,5 @@
     <li v-if="showFirstLast" @click="goPage(pages.length)" :class="{disabled: value >= pages.length}"><span>{{lastText}}</span></li>
   </ul>
 </template>
-<script src="./pagination.controller.js"></script>
+<script src="./pagination.controller.js">
+</script>

@@ -9,5 +9,5 @@ export const langCn = {
     clickHere: '点此',
     createAccountLabel: '创建账户',
     resetPwdLabel: '重置密码'
-  },
+  }
 };

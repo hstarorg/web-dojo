@@ -64,4 +64,5 @@
     </div>
   </div>
 </template>
-<script src="./Register.controller.js"></script>
+<script src="./Register.controller.js">
+</script>

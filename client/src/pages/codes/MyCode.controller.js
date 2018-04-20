@@ -19,22 +19,25 @@ export default {
     this.fetchCodes();
   },
   watch: {
-    curPage(newVal){
+    curPage(newVal) {
       this.fetchCodes();
     }
   },
   methods: {
     fetchCodes(isSearch) {
-      if(isSearch){
+      if (isSearch) {
         this.curPage = 1;
       }
-      ajax.get(`${AppConf.apiHost}/code/mycodes`, { params: { pageIndex: this.curPage, pageSize: this.pageSize, search: this.searchKeyword } })
+      ajax
+        .get(`${AppConf.apiHost}/code/mycodes`, {
+          params: { pageIndex: this.curPage, pageSize: this.pageSize, search: this.searchKeyword }
+        })
         .then(result => {
           this.codes = result.data;
           this.totalCount = result.totalCount;
         });
     },
-    clearSearch(){
+    clearSearch() {
       this.searchKeyword = '';
       this.curPage = 1;
       this.fetchCodes();
