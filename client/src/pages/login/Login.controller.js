@@ -1,5 +1,5 @@
-import { auth } from './../../services';
 import { storage, util } from './../../common';
+import { auth } from './../../services';
 
 const rememberKey = 'dojo-user-name';
 
