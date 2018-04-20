@@ -13,25 +13,21 @@ const userSchema = new Schema({
 });
 
 // 扩展原型方法: (new User()).xxx();
-userSchema.methods.xxx = () => {
-
-};
+userSchema.methods.xxx = () => {};
 
 // 扩展静态方法： User.xxx();
-userSchema.statics.findByToken = function (token, callback) {
+userSchema.statics.findByToken = function(token, callback) {
   return this.findOne({ token: token, expireTime: { $gt: Date.now() } }, callback);
 };
 
 // 扩展query方法: User.find().xxx();
-userSchema.query.xxx = () => {
-
-};
+userSchema.query.xxx = () => {};
 
 // 设定索引
 userSchema.index({ xx: 1, xxx: -1 });
 
 // 配置虚拟属性：(new User()).name.full;
-userSchema.virtual('name.full').get(function () {
+userSchema.virtual('name.full').get(function() {
   return this.name.first + ' ' + this.name.last;
 });
 

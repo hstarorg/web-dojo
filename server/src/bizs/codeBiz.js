@@ -65,16 +65,14 @@ const getMyCodes = (req, res, next) => {
   let filter = { userId };
   if (search) {
     let searchReg = new RegExp(search, 'ig');
-    filter.$or = [
-      { codeName: searchReg },
-      { codeDescription: searchReg },
-      { codeTags: search }
-    ]
+    filter.$or = [{ codeName: searchReg }, { codeDescription: searchReg }, { codeTags: search }];
   }
-  db.queryPaginationData(Code, filter, { pageIndex, pageSize }, { lastUpdated: -1 })
+  db
+    .queryPaginationData(Code, filter, { pageIndex, pageSize }, { lastUpdated: -1 })
     .then(data => {
       res.send(data);
-    }).catch(reason => next(reason));
+    })
+    .catch(reason => next(reason));
 };
 
 module.exports = {

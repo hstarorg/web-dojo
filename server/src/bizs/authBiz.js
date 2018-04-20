@@ -24,7 +24,8 @@ const doSsoLogin = async (req, res, next) => {
   // 判断用户是否登录过
   let user = await User.findOne({ unionId: userData.UnionId });
   let token = util.buildHash(userData.UnionId, 30);
-  if (!user) { // 首次sso登录
+  if (!user) {
+    // 首次sso登录
     user = new User({
       unionId: userData.UnionId, // 用户ID
       username: userData.UserName, // 用户名
@@ -37,13 +38,18 @@ const doSsoLogin = async (req, res, next) => {
     });
     await new Promise((resolve, reject) => {
       user.save(err => {
-        if (err) { return reject(err); }
+        if (err) {
+          return reject(err);
+        }
         resolve();
       });
     });
-
-  } else { // 非首次登录
-    await User.findOneAndUpdate({ unionId: user.unionId }, { $set: { displayName: userData.DisplayName, token: token, expireTime: Date.now() + EXPIRE_TIME_SPAN } });
+  } else {
+    // 非首次登录
+    await User.findOneAndUpdate(
+      { unionId: user.unionId },
+      { $set: { displayName: userData.DisplayName, token: token, expireTime: Date.now() + EXPIRE_TIME_SPAN } }
+    );
   }
   res.send({
     token,

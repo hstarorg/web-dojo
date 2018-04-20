@@ -17,7 +17,7 @@ const createGist = (req, res, next) => {
     if (err) return next(err);
     res.status(201);
     res.send(gist);
-  })
+  });
 };
 
 const getGist = (req, res, next) => {
@@ -45,10 +45,12 @@ const getGists = (req, res, next) => {
       { gistDescription: searchReg }
     ];
   }
-  db.queryPaginationData(Gist, filter, { pageIndex, pageSize })
+  db
+    .queryPaginationData(Gist, filter, { pageIndex, pageSize })
     .then(data => {
       res.send(data);
-    }).catch(reason => next(reason));
+    })
+    .catch(reason => next(reason));
 };
 
 module.exports = {

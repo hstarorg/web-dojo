@@ -6,15 +6,17 @@ const gistSchema = new Schema({
   gistId: String, //片段ID
   gistName: String, //片段名称
   gistDescription: String, //片段描述信息
-  codeFiles: [{
-    editorTheme: { type: String },
-    mode: { type: String },
-    code: { type: String },
-    description: { type: String, default: '' }
-  }],
+  codeFiles: [
+    {
+      editorTheme: { type: String },
+      mode: { type: String },
+      code: { type: String },
+      description: { type: String, default: '' }
+    }
+  ],
   created: { type: Date, default: Date.now }, // 注册时间
   lastUpdated: { type: Date, default: Date.now }, // 最后更新时间
-  isPrivate: Boolean, //是否私有
+  isPrivate: Boolean //是否私有
 });
 
 gistSchema.index({ gistName: 'text', gistDescription: 'text' });
