@@ -1,8 +1,9 @@
-const cluster = require('cluster');
-const http = require('http');
-const numCPUs = require('os').cpus().length;
+import cluster from 'node:cluster';
+import { cpus } from 'node:os';
 
-if (cluster.isMaster) {
+const numCPUs = cpus().length;
+
+if (cluster.isPrimary) {
   // Fork workers.
   for (var i = 0; i < numCPUs; i++) {
     cluster.fork();

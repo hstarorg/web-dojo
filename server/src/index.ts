@@ -1,7 +1,7 @@
-const path = require('path');
-const restExpress = require('rest-express');
+import * as path from 'node:path';
+import * as restExpress from 'rest-express';
 
-const config = require('./config');
+import { config } from './config';
 
 const options = {
   port: config.port, //必须提供，服务端口
@@ -10,7 +10,7 @@ const options = {
     //responseTime的参数配置，请参考：https://github.com/expressjs/response-time
     digits: 4, //default 3
     header: 'use-time',
-    suffix: false
+    suffix: false,
   },
   enableLog: true, //是否启用日志
   logFormat: 'combined', //设置日志格式
@@ -26,24 +26,19 @@ const options = {
   enableGzip: true, //是否启用Gzip支持
   gzipOptions: {}, //gzip配置，请参考：https://github.com/expressjs/compression
   enableHttps: false, //是否启用Https
-  onRoutesLoading: app => {
+  onRoutesLoading: (app) => {
     //加载路由之前要执行的操作，参数app = express();
     console.log('before load routes');
   },
-  onRoutesLoaded: app => {
+  onRoutesLoaded: (app) => {
     //加载路由之后要执行的操作，参数app = express();
     console.log('after load routes');
   },
   routesPath: path.join(__dirname, 'routes'), //路由目录，所有要加载的路由都放置在此处。
-  apiPrefix: config.apiPrefix //全局Api前缀， 如： /api/v1
+  apiPrefix: config.apiPrefix, //全局Api前缀， 如： /api/v1
 };
 
-restExpress.startServer(options).then(
-  server => {
-    let address = server.address();
-    console.log('Server started', address);
-  },
-  err => {
-    console.error(err);
-  }
-);
+restExpress.startServer(options).then((server) => {
+  let address = server.address();
+  console.log('Server started', address);
+}, console.error);

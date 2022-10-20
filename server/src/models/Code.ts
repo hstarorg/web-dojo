@@ -1,4 +1,4 @@
-const db = require('./../common/db');
+import { mongoose as db } from '../common';
 const Schema = db.Schema;
 
 const codeSchema = new Schema({
@@ -13,11 +13,9 @@ const codeSchema = new Schema({
   css: String, // CSS内容
   created: { type: Date, default: Date.now }, // 注册时间
   lastUpdated: { type: Date, default: Date.now }, // 最后更新时间
-  isPrivate: Boolean //是否私有
+  isPrivate: Boolean, //是否私有
 });
 
 codeSchema.index({ codeName: 'text', codeDescription: 'text' });
 
-const Code = db.model('Code', codeSchema);
-
-module.exports = Code;
+export const Code = db.model('Code', codeSchema);

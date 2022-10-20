@@ -1,6 +1,8 @@
-const router = new Router();
-const { util } = require('../common');
-const authBiz = require('./../bizs/authBiz');
+import { Router } from 'express';
+import { util } from '../common';
+import { authBiz } from '../bizs/authBiz';
+
+const router = Router();
 
 router
   // 自动登录
@@ -11,5 +13,5 @@ router
 module.exports = {
   priority: 0,
   router: router,
-  prefix: '/auth'
+  prefix: '/auth',
 };

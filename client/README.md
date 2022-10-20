@@ -1,6 +1,6 @@
 # web-dojo-client
 
-XXX
+web-dojo 前端代码仓库
 
 ## Build Setup
 

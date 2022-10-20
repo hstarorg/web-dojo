@@ -1,7 +1,10 @@
-const router = new Router();
-const codeBiz = require('./../bizs/codeBiz');
-const authBiz = require('./../bizs/authBiz');
-const { util } = require('../common');
+import { Router } from 'express';
+
+import { codeBiz } from '../bizs/codeBiz';
+import { authBiz } from '../bizs/authBiz';
+import { util } from '../common';
+
+const router = Router();
 
 router
   // 获取项目列表
@@ -18,5 +21,5 @@ router
 module.exports = {
   priority: 0,
   router: router,
-  prefix: '/code'
+  prefix: '/code',
 };

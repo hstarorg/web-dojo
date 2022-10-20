@@ -1,7 +1,6 @@
-const Code = require('./../models/Code');
-const BusError = require('./../models/BusError');
-const util = require('./../common/util');
-const db = require('./../common/db');
+import { Code } from '../models/Code';
+import { BizError } from '../models/BizError';
+import { queryPaginationData, util } from '../common';
 
 const createCode = (req, res, next) => {
   let body = req.body;
@@ -15,7 +14,7 @@ const createCode = (req, res, next) => {
     javascript: body.javascript, // JS内容
     html: body.html, // HTML内容
     css: body.css, // CSS内容
-    isPrivate: body.isPrivate || false
+    isPrivate: body.isPrivate || false,
   });
   code.save((err, code) => {
     if (err) return next(err);
@@ -32,8 +31,8 @@ const updateCode = async (req, res, next) => {
     $set: {
       javascript: data.javascript,
       html: data.html,
-      css: data.css
-    }
+      css: data.css,
+    },
   };
   let c = await Code.count({ codeId, userId });
   if (c === 0) {
@@ -51,33 +50,32 @@ const getCode = (req, res, next) => {
   Code.findOne({ codeId: codeId }, (err, code) => {
     if (err) return next(err);
     if (!code) {
-      return res.send(new BusError('Code not exists.'));
+      return res.send(new BizError('Code not exists.'));
     }
     res.send(code);
   });
 };
 
 const getMyCodes = (req, res, next) => {
-  let userId = req.reqObj.userId;
-  let pageIndex = +req.query.pageIndex || 1;
-  let pageSize = +req.query.pageSize || 20;
-  let search = req.query.search;
-  let filter = { userId };
+  const userId = req.reqObj.userId;
+  const pageIndex = +req.query.pageIndex || 1;
+  const pageSize = +req.query.pageSize || 20;
+  const search = req.query.search;
+  const filter: Record<string, any> = { userId };
   if (search) {
     let searchReg = new RegExp(search, 'ig');
     filter.$or = [{ codeName: searchReg }, { codeDescription: searchReg }, { codeTags: search }];
   }
-  db
-    .queryPaginationData(Code, filter, { pageIndex, pageSize }, { lastUpdated: -1 })
-    .then(data => {
+  queryPaginationData(Code, filter, { pageIndex, pageSize }, { lastUpdated: -1 })
+    .then((data) => {
       res.send(data);
     })
-    .catch(reason => next(reason));
+    .catch((reason) => next(reason));
 };
 
-module.exports = {
+export const codeBiz = {
   createCode,
   updateCode,
   getCode,
-  getMyCodes
+  getMyCodes,
 };
