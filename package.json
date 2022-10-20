@@ -10,5 +10,9 @@
   },
   "keywords": [],
   "author": "Jay.M.Hu",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.4.0",
+    "typescript": "^4.8.4"
+  }
 }
