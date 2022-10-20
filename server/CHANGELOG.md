@@ -1,9 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 0.3.x (2017-08-xx)
+## 0.4.0 (2022-10-21)
 
 - 限制更改他人的Code
+- 代码切换为 TypeScript
+- 优化构建脚本
 
 ## 0.3.0 (2017-08-14)
 

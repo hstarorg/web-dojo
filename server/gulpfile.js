@@ -9,7 +9,7 @@ gulp.task('clean', (done) => {
 });
 
 gulp.task('copy', () => {
-  return gulp.src(['./src/**', './package.json']).pipe(gulp.dest('./dist'));
+  return gulp.src(['./package.json', './pnpm-lock.yaml']).pipe(gulp.dest('./dist'));
 });
 
 gulp.task('serve', (done) => {

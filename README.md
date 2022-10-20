@@ -15,6 +15,12 @@ This website is published on <a href="http://dojo.hstar.vip" target="_blank">htt
 ```bash
 # 安装依赖
 pnpm i
+
+# 启动环境
+pnpm dev
+
+# 打包
+pnpm build
 ```
 
 # Two Parts
