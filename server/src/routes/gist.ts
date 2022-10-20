@@ -1,6 +1,9 @@
-let router = new Router();
-let gistBiz = require('./../bizs/gistBiz');
-let authBiz = require('./../bizs/authBiz');
+import { Router } from 'express';
+
+import { gistBiz } from '../bizs/gistBiz';
+import { authBiz } from '../bizs/authBiz';
+
+const router = Router();
 
 router
   // 创建Gist
@@ -13,5 +16,5 @@ router
 module.exports = {
   priority: 0,
   router: router,
-  prefix: '/gist'
+  prefix: '/gist',
 };

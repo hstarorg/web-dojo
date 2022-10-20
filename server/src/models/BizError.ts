@@ -1,5 +1,9 @@
-class BusError {
-  constructor(err) {
+export class BizError {
+  status: number;
+  hasError: boolean;
+  statck: Error | string;
+  message: string;
+  constructor(err: Error | string) {
     this.status = 200;
     this.hasError = true;
     this.statck = err;
@@ -12,5 +16,3 @@ class BusError {
     }
   }
 }
-
-module.exports = BusError;

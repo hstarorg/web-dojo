@@ -1,9 +1,8 @@
-const axios = require('axios').default;
-const User = require('./../models/User');
-const BusError = require('./../models/BusError');
-
-const config = require('../config');
-const util = require('./../common/util');
+import axios from 'axios';
+import { User } from '../models/User';
+import { BizError } from '../models/BizError';
+import { config } from '../config';
+import { util } from '../common/util';
 
 const EXPIRE_TIME_SPAN = 1000 * 60 * 60 * 24 * 7; // 7天的毫秒数
 
@@ -48,7 +47,7 @@ const doSsoLogin = async (req, res, next) => {
         if (err) {
           return reject(err);
         }
-        resolve();
+        resolve(true);
       });
     });
   } else {
@@ -72,7 +71,7 @@ const doAutoLogin = async (req, res, next) => {
   let token = req.body.token;
   let user = await User.findOne({ token: token, expireTime: { $gt: Date.now() } });
   if (!user) {
-    return res.send(new BusError('auto login failed.'));
+    return res.send(new BizError('auto login failed.'));
   }
   res.send({
     token,
@@ -84,13 +83,13 @@ const doAutoLogin = async (req, res, next) => {
   });
 };
 
-module.exports = {
+export const authBiz = {
   doSsoLogin,
   doAutoLogin,
   validateUser(req, res, next) {
     let token = req.headers['x-token'];
     if (!token) {
-      return res.send(new BusError('Headers must include x-token.'));
+      return res.send(new BizError('Headers must include x-token.'));
     }
     User.findByToken(token, (err, user) => {
       if (err) return next(err);

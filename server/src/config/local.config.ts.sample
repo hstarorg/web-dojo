@@ -1,4 +1,4 @@
-module.exports = {
+ export const localConfig = {
   mongoAddress: 'mongodb://192.168.1.200/dojo', // Mongo Db 地址
   ssoApp: {
     authAddress: 'https://sso.hstar.org/api/v1/get_user_info', // SSO地址

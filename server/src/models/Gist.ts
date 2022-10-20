@@ -1,4 +1,4 @@
-const db = require('./../common/db');
+import { mongoose as db } from '../common';
 const Schema = db.Schema;
 
 const gistSchema = new Schema({
@@ -11,16 +11,14 @@ const gistSchema = new Schema({
       editorTheme: { type: String },
       mode: { type: String },
       code: { type: String },
-      description: { type: String, default: '' }
-    }
+      description: { type: String, default: '' },
+    },
   ],
   created: { type: Date, default: Date.now }, // 注册时间
   lastUpdated: { type: Date, default: Date.now }, // 最后更新时间
-  isPrivate: Boolean //是否私有
+  isPrivate: Boolean, //是否私有
 });
 
 gistSchema.index({ gistName: 'text', gistDescription: 'text' });
 
-const Gist = db.model('Gist', gistSchema);
-
-module.exports = Gist;
+export const Gist = db.model('Gist', gistSchema);
