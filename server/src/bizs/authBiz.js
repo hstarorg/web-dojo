@@ -15,12 +15,19 @@ const doSsoLogin = async (req, res, next) => {
   }
   let ssoApp = config.ssoApp;
   // 获取sso user info
-  let res2 = await axios.post(ssoApp.authAddress, {
-    appKey: ssoApp.appKey,
-    appSecret: ssoApp.appSecret,
-    code
-  });
-  let userData = res2.data;
+
+  let userData;
+  try {
+    let res2 = await axios.post(ssoApp.authAddress, {
+      appKey: ssoApp.appKey,
+      appSecret: ssoApp.appSecret,
+      code,
+    });
+    userData = res2.data;
+  } catch (reason) {
+    const errData = reason?.response?.data || reason;
+    throw new Error(errData?.message);
+  }
   // 判断用户是否登录过
   let user = await User.findOne({ unionId: userData.UnionId });
   let token = util.buildHash(userData.UnionId, 30);
@@ -34,10 +41,10 @@ const doSsoLogin = async (req, res, next) => {
       password: '', // 密码
       registerDate: new Date(userData.CreateDate),
       token,
-      expireTime: Date.now() + EXPIRE_TIME_SPAN
+      expireTime: Date.now() + EXPIRE_TIME_SPAN,
     });
     await new Promise((resolve, reject) => {
-      user.save(err => {
+      user.save((err) => {
         if (err) {
           return reject(err);
         }
@@ -56,8 +63,8 @@ const doSsoLogin = async (req, res, next) => {
     user: {
       username: user.username,
       displayName: user.displayName,
-      avatarUrl: user.avatarUrl
-    }
+      avatarUrl: user.avatarUrl,
+    },
   });
 };
 
@@ -72,8 +79,8 @@ const doAutoLogin = async (req, res, next) => {
     user: {
       username: user.username,
       displayName: user.displayName,
-      avatarUrl: user.avatarUrl
-    }
+      avatarUrl: user.avatarUrl,
+    },
   });
 };
 
@@ -95,5 +102,5 @@ module.exports = {
       req.reqObj.userId = user.unionId;
       next();
     });
-  }
+  },
 };
