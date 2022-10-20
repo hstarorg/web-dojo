@@ -3,6 +3,7 @@
   "version": "0.3.0",
   "description": "server side for web-dojo",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "npm run dev",
     "tsc": "tsc --watch --pretty",

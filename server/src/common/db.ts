@@ -2,8 +2,7 @@ import * as mongoose from 'mongoose';
 import { config } from '../config';
 
 mongoose.connect(config.mongoAddress, {
-  maxPoolSize: 5,
-  dbName: 'dojo',
+  maxPoolSize: 5
 });
 
 // Debug mode
