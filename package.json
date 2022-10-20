@@ -1,0 +1,14 @@
+{
+  "name": "web-dojo",
+  "version": "1.0.0",
+  "description": "The web playground help us test app quickly.",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter web-dojo-client --filter web-dojo-server dev",
+    "build": "pnpm --filter web-dojo-client --filter web-dojo-server build"
+  },
+  "keywords": [],
+  "author": "Jay.M.Hu",
+  "license": "ISC"
+}
